@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReviewPostShow">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <TextView
+                android:id="@+id/update_reviewpost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="update Text"></TextView>
+            <ImageView
+                android:id="@+id/image_reviewpost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                ></ImageView>
+            <TextView
+                android:id="@+id/title_reviewpost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Title"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="30dp"
+                android:gravity="center_horizontal"></TextView>
+            <TextView
+                android:id="@+id/content_reviewpost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Content"></TextView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="71dp"
+                android:background="@drawable/teal_circle"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/like_btn_reviewpost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/transparent"
+                    android:src="@drawable/like"></ImageButton>
+
+                <ImageButton
+                    android:id="@+id/cmt_btn_reviewpost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/transparent"
+                    android:src="@drawable/cmt"></ImageButton>
+
+                <ImageButton
+                    android:id="@+id/map_btn_reviewpost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:backgroundTint="@android:color/transparent"
+                    android:src="@drawable/map_in_reviewpost"></ImageButton>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

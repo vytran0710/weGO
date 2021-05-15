@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReviewPosts">
+    <TextView
+        android:id="@+id/wego2"
+        android:layout_width="136dp"
+        android:layout_height="54dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/righteous"
+        android:gravity="top"
+        android:text="@string/wego"
+        android:textAppearance="@style/wego"
+        android:textColor="#07BEB8"
+        android:textSize="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/white"
+        app:srcCompat="@drawable/find_vector" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="409dp"
+        android:layout_height="62dp"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/circle">
+
+
+        <ImageButton
+            android:id="@+id/home_btn"
+            android:layout_width="136dp"
+            android:layout_height="57dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:background="@drawable/circle"
+            app:srcCompat="@drawable/home" />
+
+        <ImageButton
+            android:id="@+id/profile_btn"
+            android:layout_width="136dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@drawable/circle"
+            app:srcCompat="@drawable/profile" />
+
+        <ImageButton
+            android:id="@+id/setting_btn"
+            android:layout_width="136dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@drawable/circle"
+            app:srcCompat="@drawable/setting" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="8dp"
+            android:text="Đà Lạt"
+            android:textAlignment="center"
+            android:textColor="#07BEB8"
+            android:textSize="20dp"
+            android:textStyle="bold"></TextView>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_main"
+        android:layout_width="409dp"
+        android:layout_height="558dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
