@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ReviewPosts">
     <TextView
-        android:id="@+id/wego2"
+        android:id="@+id/logo2"
         android:layout_width="136dp"
         android:layout_height="54dp"
         android:layout_centerHorizontal="true"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/search_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +81,7 @@
 
 
         <TextView
+            android:id="@+id/place_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"

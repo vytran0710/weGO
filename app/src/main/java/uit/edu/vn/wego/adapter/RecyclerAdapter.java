@@ -4,12 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
         //
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = itemView.findViewById(R.id.title_textview);
+            title = itemView.findViewById(R.id.title_text);
             imgview = itemView.findViewById(R.id.image_view);
         }
     }

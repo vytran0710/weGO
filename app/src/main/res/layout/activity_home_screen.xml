@@ -7,7 +7,7 @@
     tools:context=".HomeScreenActivity">
 
     <TextView
-        android:id="@+id/wego2"
+        android:id="@+id/logo2"
         android:layout_width="136dp"
         android:layout_height="54dp"
         android:layout_centerHorizontal="true"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/search_btn"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"

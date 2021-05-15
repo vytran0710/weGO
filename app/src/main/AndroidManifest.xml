@@ -12,7 +12,6 @@
         <activity android:name=".ReviewPostShow"></activity>
         <activity android:name=".HomeScreenActivity" />
         <activity android:name=".PlaceByRegion" />
-        <activity android:name=".FamousPlace" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ReviewPosts">
