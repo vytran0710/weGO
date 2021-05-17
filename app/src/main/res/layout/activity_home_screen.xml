@@ -63,7 +63,8 @@
                 android:layout_height="200dp"
                 app:cardCornerRadius="20dp"
                 android:layout_marginBottom="15dp"
-                android:layout_marginHorizontal="5dp">
+                android:layout_marginHorizontal="5dp"
+                android:id="@+id/famous_place">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -96,7 +97,8 @@
                 android:layout_height="200dp"
                 app:cardCornerRadius="20dp"
                 android:layout_marginBottom="15dp"
-                android:layout_marginHorizontal="5dp">
+                android:layout_marginHorizontal="5dp"
+                android:id="@+id/place_by_region">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -129,7 +131,8 @@
                 android:layout_height="200dp"
                 app:cardCornerRadius="20dp"
                 android:layout_marginBottom="15dp"
-                android:layout_marginHorizontal="5dp">
+                android:layout_marginHorizontal="5dp"
+                android:id="@+id/travel_tips">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -162,7 +165,8 @@
                 android:layout_height="200dp"
                 app:cardCornerRadius="20dp"
                 android:layout_marginBottom="75dp"
-                android:layout_marginHorizontal="5dp">
+                android:layout_marginHorizontal="5dp"
+                android:id="@+id/food">
 
                 <RelativeLayout
                     android:layout_width="match_parent"

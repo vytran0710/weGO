@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReviewPosts">
+    tools:context=".CategoryItemListActivity">
 
     <RelativeLayout
         android:id="@+id/top_group"
@@ -36,12 +36,10 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_item_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/top_group"
-        android:id="@+id/review_post_recyclerview">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_below="@+id/top_group" />
 
     <LinearLayout
         android:id="@+id/toolbar"

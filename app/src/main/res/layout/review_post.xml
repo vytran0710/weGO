@@ -1,85 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:background="@android:color/transparent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/transparent"
+    app:cardCornerRadius="40dp">
 
-    <LinearLayout
-        android:paddingTop="15dp"
+    <RelativeLayout
         android:id="@+id/item_review_post"
-        android:layout_width="370dp"
-        android:layout_height="440dp"
-        android:background="@drawable/round_edge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/update_textview"
+            android:id="@+id/update_date_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:text="update date"></TextView>
+            android:text="update_date"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
 
         <RelativeLayout
-            android:layout_width="346dp"
-            android:layout_height="325dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="315dp"
+            android:id="@+id/review_post_info"
+            android:layout_below="@id/update_date_textview">
 
             <ImageView
-                android:id="@+id/image_view"
+                android:id="@+id/review_post_imageview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></ImageView>
+                android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/title_text"
+                android:id="@+id/title_textview"
                 android:layout_width="match_parent"
                 android:layout_height="88dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginEnd="-2dp"
-                android:layout_marginRight="-2dp"
-                android:layout_marginBottom="1dp"
-                android:background="#A6000000"
+                android:background="#A4000000"
                 android:gravity="center"
                 android:text="Title"
                 android:textColor="@color/white"
                 android:textSize="25dp"
-                android:textStyle="bold"></TextView>
+                android:textStyle="bold" />
+
         </RelativeLayout>
 
         <LinearLayout
-            android:layout_width="370dp"
+            android:layout_width="match_parent"
             android:layout_height="71dp"
-            android:background="@drawable/teal_circle"
+            android:layout_below="@+id/review_post_info"
+            android:background="@color/teal"
             android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/like_btn"
-                android:layout_width="123dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:backgroundTint="@android:color/transparent"
                 android:src="@drawable/like"></ImageButton>
 
             <ImageButton
                 android:id="@+id/cmt_btn"
-                android:layout_width="123dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:backgroundTint="@android:color/transparent"
                 android:src="@drawable/cmt"></ImageButton>
 
             <ImageButton
                 android:id="@+id/map_btn"
-                android:layout_width="123dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:backgroundTint="@android:color/transparent"
-                android:src="@drawable/map"></ImageButton>
+                android:src="@drawable/map_in_reviewpost"></ImageButton>
         </LinearLayout>
-    </LinearLayout>
-    
-</RelativeLayout>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

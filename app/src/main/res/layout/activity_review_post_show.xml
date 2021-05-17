@@ -44,7 +44,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="71dp"
-                android:background="@drawable/teal_circle"
+                android:background="@color/teal"
                 android:orientation="horizontal">
 
                 <ImageButton
