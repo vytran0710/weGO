@@ -27,8 +27,7 @@ public class ReviewPosts extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
     public void CreateItem(){
-        item_model.add(new ModelItemReviewPost("1st","Testing","wow",true));
-        item_model.add(new ModelItemReviewPost("2nd","Testing 2","wow",true));
-
+        item_model.add(new ModelItemReviewPost("1st","Testing", "winter", "cold", 231, new ArrayList<String>(), new ArrayList<String>()));
+        item_model.add(new ModelItemReviewPost("2nd","Testing 2", "summer", "cool", 123123, new ArrayList<String>(), new ArrayList<String>()));
     }
 }

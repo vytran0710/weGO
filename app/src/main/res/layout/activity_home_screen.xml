@@ -1,240 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeScreenActivity">
 
-    <TextView
-        android:id="@+id/logo2"
-        android:layout_width="136dp"
-        android:layout_height="54dp"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="@font/righteous"
-        android:gravity="top"
-        android:text="@string/wego"
-        android:textAppearance="@style/wego"
-        android:textColor="#07BEB8"
-        android:textSize="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:id="@+id/top_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
 
-    <ImageButton
-        android:id="@+id/search_btn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/white"
-        app:srcCompat="@drawable/find_vector" />
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="409dp"
-        android:layout_height="62dp"
-        android:orientation="horizontal"
-        android:layout_margin="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/circle">
-
+        <TextView
+            android:id="@+id/logo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="@font/righteous"
+            android:paddingLeft="15dp"
+            android:text="@string/wego"
+            android:textAppearance="@style/wego"
+            android:textColor="#07BEB8"
+            android:textSize="50dp" />
 
         <ImageButton
-            android:id="@+id/home_btn"
-            android:layout_width="136dp"
-            android:layout_height="57dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0"
-            android:background="@drawable/circle"
-            app:srcCompat="@drawable/home" />
+            android:id="@+id/search_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/find_vector" />
 
-        <ImageButton
-            android:id="@+id/profile_btn"
-            android:layout_width="136dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:onClick="homebtn"
-            android:background="@drawable/circle"
-            app:srcCompat="@drawable/profile" />
+    </RelativeLayout>
 
-        <ImageButton
-            android:id="@+id/setting_btn"
-            android:layout_width="136dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:background="@drawable/circle"
-            app:srcCompat="@drawable/setting" />
-
-    </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/categories_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
         android:text="Phân loại"
         android:textColor="#07BEB8"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="62dp"
+        android:layout_below="@+id/top_group"
+        android:layout_centerHorizontal="true"/>
 
     <ScrollView
-        android:layout_width="409dp"
-        android:layout_height="559dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/categories_textview">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="10dp">
+                android:layout_height="200dp"
+                app:cardCornerRadius="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginHorizontal="5dp">
 
-                <ImageView
-                    android:id="@+id/imageView_item_background_4"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/category_item_title_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="101dp"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginRight="0dp"
-                    android:background="@drawable/item_style_textview"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="10dp"
-                    android:text="Địa điểm nổi tiếng"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/famous_place_background_imageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-            <RelativeLayout
+                    <TextView
+                        android:id="@+id/famous_place_category_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/item_style_textview"
+                        android:gravity="center_horizontal"
+                        android:text="Địa điểm nổi tiếng"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="10dp">
+                android:layout_height="200dp"
+                app:cardCornerRadius="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginHorizontal="5dp">
 
-                <ImageView
-                    android:id="@+id/imageView_item_background_3"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/category_item_title_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="101dp"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginRight="0dp"
-                    android:background="@drawable/item_style_textview"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="10dp"
-                    android:text="Địa điểm theo vùng"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/place_by_region_background_imageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-            <RelativeLayout
+                    <TextView
+                        android:id="@+id/place_by_region_category_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/item_style_textview"
+                        android:gravity="center_horizontal"
+                        android:text="Địa điểm theo vùng"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="10dp">
+                android:layout_height="200dp"
+                app:cardCornerRadius="20dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginHorizontal="5dp">
 
-                <ImageView
-                    android:id="@+id/imageView_item_background_2"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/category_item_title_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="101dp"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginRight="0dp"
-                    android:background="@drawable/item_style_textview"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="10dp"
-                    android:text="Mẹo khi du lịch "
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/travel_tips_background_imageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-            <RelativeLayout
+                    <TextView
+                        android:id="@+id/travel_tips_category_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/item_style_textview"
+                        android:gravity="center_horizontal"
+                        android:text="Mẹo khi du lịch "
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="10dp">
+                android:layout_height="200dp"
+                app:cardCornerRadius="20dp"
+                android:layout_marginBottom="75dp"
+                android:layout_marginHorizontal="5dp">
 
-                <ImageView
-                    android:id="@+id/imageView_item_background_1"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/category_item_title_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="101dp"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginRight="0dp"
-                    android:background="@drawable/item_style_textview"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="10dp"
-                    android:text="Text"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/food_background_imageview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/food_category_textview"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/item_style_textview"
+                        android:gravity="center_horizontal"
+                        android:text="Ẩm thực"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@drawable/circle"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="5dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/home_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:src="@drawable/home"
+            android:background="@drawable/circle" />
+
+        <ImageButton
+            android:id="@+id/profile_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/profile"
+            android:background="@drawable/circle" />
+
+        <ImageButton
+            android:id="@+id/setting_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/setting"
+            android:background="@drawable/circle" />
+
+    </LinearLayout>
+
+</RelativeLayout>

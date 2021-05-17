@@ -4,50 +4,48 @@ import java.util.ArrayList;
 
 public class ModelItemReviewPost {
     private String id;
+    private String tag;
     private String title;
     private String content;
-    private Boolean like;
+    private int like;
     private ArrayList<String> comment;
     private ArrayList<String> imgURL;
-    public ModelItemReviewPost(String id,String title,String content, Boolean like){
+
+    public ModelItemReviewPost(String id, String tag, String title, String content, int like, ArrayList<String> comment, ArrayList<String> imgURL) {
         this.id = id;
+        this.tag = tag;
         this.title = title;
         this.content = content;
         this.like = like;
-//        this.comment = cmt;
-//        this.imgURL = imgURL;
+        this.comment = comment;
+        this.imgURL = imgURL;
+    }
 
-    };
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
-    public void setId(String id)
-    {
-        this.id = id;
+
+    public String getTag() {
+        return tag;
     }
-    public String getTitle()
-    {
+
+    public String getTitle() {
         return title;
     }
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-    public Boolean getLike()
-    {
-        return like;
-    }
-    public void setLike(Boolean like)
-    {
-        this.like = like;
-    }
-    public String getContent()
-    {
+
+    public String getContent() {
         return content;
     }
-    public void setContent(String content)
-    {
-        this.content = content;
+
+    public int getLike() {
+        return like;
+    }
+
+    public ArrayList<String> getComment() {
+        return comment;
+    }
+
+    public ArrayList<String> getImgURL() {
+        return imgURL;
     }
 }

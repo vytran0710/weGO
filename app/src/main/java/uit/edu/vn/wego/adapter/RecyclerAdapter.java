@@ -42,9 +42,6 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
     }
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position){
-        ModelItemReviewPost item = item_model.get(position);
-        holder.title.setText(item.getTitle());
-
     }
     @Override
     public int getItemCount(){
