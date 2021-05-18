@@ -1,6 +1,8 @@
 package uit.edu.vn.wego.adapter;
 
-public class ModelItemCategory {
+import java.io.Serializable;
+
+public class ModelItemCategory implements Serializable {
     private String name;
     private String imgURL;
     private String tag;

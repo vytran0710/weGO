@@ -1,8 +1,9 @@
 package uit.edu.vn.wego.adapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ModelItemReviewPost {
+public class ModelItemReviewPost implements Serializable {
     private String id;
     private String update_date;
     private String tag;

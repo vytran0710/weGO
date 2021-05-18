@@ -27,7 +27,11 @@ public class ReviewPosts extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
     public void CreateItem(){
-        item_model.add(new ModelItemReviewPost("1st", "12/1/2022","Testing", "winter", "cold", "cold", 231, new ArrayList<String>(), new ArrayList<String>()));
-        item_model.add(new ModelItemReviewPost("2nd", "12/1/2022","Testing 2", "summer", "cool", "cold", 123123, new ArrayList<String>(), new ArrayList<String>()));
+        item_model.add(new ModelItemReviewPost("1", "12/1/2022","miennam|dalat", "Thành phố Đà Lạt", "https://www.google.com/maps/place/Dalat,+L%C3%A2m+%C4%90%E1%BB%93ng/data=!4m2!3m1!1s0x317112fef20988b1:0xad5f228b672bf930?sa=X&ved=2ahUKEwjq8K68ytPwAhWHHKYKHX0MCtgQ8gEwFXoECDUQAQ", "\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-\n-", 231, new ArrayList<String>(), new ArrayList<String>()));
+        item_model.add(new ModelItemReviewPost("2", "12/1/2022","mientrung|dalak", "summer", "cool", "cold", 123123, new ArrayList<String>(), new ArrayList<String>()));
+        item_model.add(new ModelItemReviewPost("2", "12/1/2022","mientrung|dalak", "summer", "cool", "cold", 123123, new ArrayList<String>(), new ArrayList<String>()));
+        item_model.add(new ModelItemReviewPost("2", "12/1/2022","mientrung|dalak", "summer", "cool", "cold", 123123, new ArrayList<String>(), new ArrayList<String>()));
+        item_model.add(new ModelItemReviewPost("2", "12/1/2022","mientrung|dalak", "summer", "cool", "cold", 123123, new ArrayList<String>(), new ArrayList<String>()));
+        item_model.add(new ModelItemReviewPost("2", "12/1/2022","mientrung|dalak", "summer", "cool", "cold", 123123, new ArrayList<String>(), new ArrayList<String>()));
     }
 }

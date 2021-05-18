@@ -1,6 +1,8 @@
 package uit.edu.vn.wego.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,9 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import uit.edu.vn.wego.CategoryItemListActivity;
 import uit.edu.vn.wego.R;
+import uit.edu.vn.wego.ReviewPosts;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     Context context;
@@ -48,6 +52,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position){
         holder.name.setText(item_model.get(position).getName());
         Glide.with(context).load(item_model.get(position).getImgURL()).centerCrop().into(holder.imgURL);
+        holder.item.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ReviewPosts.class);
+                intent.putExtra("selected_item", item_model.get(position).getTag());
+                ((Activity)v.getContext()).startActivity(intent);
+            }
+        });
     }
     @Override
     public int getItemCount(){

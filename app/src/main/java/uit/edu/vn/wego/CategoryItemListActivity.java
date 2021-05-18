@@ -5,8 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.Toast;
-
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -28,8 +26,6 @@ public class CategoryItemListActivity extends AppCompatActivity {
 
         selected_category = getIntent().getStringExtra("selected_category");
         recyclerview = findViewById(R.id.category_item_recyclerview);
-
-        Toast.makeText(this,selected_category,Toast.LENGTH_LONG).show();
 
         switch(selected_category)
         {
