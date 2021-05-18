@@ -39,7 +39,9 @@
         android:id="@+id/category_item_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/top_group" />
+        android:layout_below="@+id/top_group"
+        android:paddingBottom="60dp"
+        android:clipToPadding="false" />
 
     <LinearLayout
         android:id="@+id/toolbar"

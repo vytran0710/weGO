@@ -5,6 +5,7 @@
     app:cardCornerRadius="20dp"
     android:layout_marginBottom="15dp"
     android:layout_marginHorizontal="5dp"
+    android:id="@+id/category_item"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout

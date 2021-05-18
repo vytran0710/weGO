@@ -52,5 +52,32 @@ public class HomeScreenActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        place_by_region.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), CategoryItemListActivity.class);
+                intent.putExtra("selected_category", "place_by_region");
+                startActivity(intent);
+            }
+        });
+
+        travel_tips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), CategoryItemListActivity.class);
+                intent.putExtra("selected_category", "travel_tips");
+                startActivity(intent);
+            }
+        });
+
+        food.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), CategoryItemListActivity.class);
+                intent.putExtra("selected_category", "food");
+                startActivity(intent);
+            }
+        });
     }
 }
