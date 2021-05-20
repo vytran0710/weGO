@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -55,6 +57,7 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
     public void onBindViewHolder(@NonNull ViewHolder holder, int position){
         holder.title.setText(item_model.get(position).getTitle());
         holder.update_date.setText(item_model.get(position).getUpdate_date());
+        Glide.with(context).load(item_model.get(position).getImgURL().get(0)).centerCrop().into(holder.review_post_imageview);
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
