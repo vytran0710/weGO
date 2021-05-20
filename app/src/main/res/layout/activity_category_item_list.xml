@@ -77,8 +77,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/setting"
-            android:background="@drawable/circle" />
-
+            android:background="@drawable/circle"/>
     </LinearLayout>
 
 </RelativeLayout>

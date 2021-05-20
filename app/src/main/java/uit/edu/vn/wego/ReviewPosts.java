@@ -26,6 +26,9 @@ public class ReviewPosts extends AppCompatActivity {
         item_model = new ArrayList<>();
         ArrayList<String> temp = new ArrayList<String>();
         temp.add("Anonymous: Đẹp quá hihi");
+        temp.add("Anonymous: Đẹp quá ahjhj");
+        temp.add("Anonymous: 123456");
+        temp.add("Anonymous: 12354");
         ArrayList<String> temp1 = new ArrayList<String>();
         temp1.add("https://fantasea.vn/wp-content/uploads/2018/09/da-lat.jpg");
         item_model.add(new ModelItemReviewPost("1", "12/1/2022","tips|miennam|dalat", "Thành phố Đà Lạt", "https://www.google.com/maps/place/Dalat,+L%C3%A2m+%C4%90%E1%BB%93ng/data=!4m2!3m1!1s0x317112fef20988b1:0xad5f228b672bf930?sa=X&ved=2ahUKEwjq8K68ytPwAhWHHKYKHX0MCtgQ8gEwFXoECDUQAQ", "content", 231, temp, temp1));
