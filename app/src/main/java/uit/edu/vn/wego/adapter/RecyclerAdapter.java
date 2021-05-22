@@ -3,9 +3,12 @@ package uit.edu.vn.wego.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,6 +39,10 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
         private ImageView review_post_imageview;
         private CardView item;
         private TextView update_date;
+
+        private ImageButton like_button;
+        private ImageButton comment_button;
+        private ImageButton location_button;
         //
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -43,6 +50,10 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
             review_post_imageview = itemView.findViewById(R.id.review_post_imageview);
             item = itemView.findViewById(R.id.review_post);
             update_date = itemView.findViewById(R.id.update_date_textview);
+
+            like_button = itemView.findViewById(R.id.like_btn);
+            comment_button = itemView.findViewById(R.id.cmt_btn);
+            location_button = itemView.findViewById(R.id.map_btn);
         }
     }
     @NonNull
@@ -64,6 +75,27 @@ public class RecyclerAdapter  extends RecyclerView.Adapter<RecyclerAdapter.ViewH
                 Intent intent = new Intent(v.getContext(), ReviewPostShow.class);
                 intent.putExtra("item", item_model.get(position));
                 ((Activity)v.getContext()).startActivity(intent);
+            }
+        });
+        holder.like_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: add to user's favorite list
+            }
+        });
+        holder.comment_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ReviewPostShow.class);
+                intent.putExtra("item", item_model.get(position));
+                ((Activity)v.getContext()).startActivity(intent);
+            }
+        });
+        holder.location_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item_model.get(position).getLocationURL()));
+                ((Activity)v.getContext()).startActivity(browserIntent);
             }
         });
     }

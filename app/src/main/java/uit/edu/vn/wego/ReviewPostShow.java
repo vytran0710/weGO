@@ -2,12 +2,17 @@ package uit.edu.vn.wego;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -22,6 +27,13 @@ public class ReviewPostShow extends AppCompatActivity {
     private TextView content;
     private ImageView image;
     private LinearLayout comments;
+
+    private ImageButton like_button;
+    private ImageButton comment_button;
+    private ImageButton location_button;
+
+    private LinearLayout comment_section;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +50,12 @@ public class ReviewPostShow extends AppCompatActivity {
         title.setText(item.getTitle());
         content.setText(item.getContent());
         Glide.with(this).load(item.getImgURL().get(0)).into(image);
+
+        like_button = findViewById(R.id.like_btn_reviewpost);
+        comment_button = findViewById(R.id.cmt_btn_reviewpost);
+        location_button = findViewById(R.id.map_btn_reviewpost);
+
+        comment_section = findViewById(R.id.review_post_comment_section);
 
         for(int i = 0; i < item.getComment().size(); ++i)
         {
@@ -56,5 +74,34 @@ public class ReviewPostShow extends AppCompatActivity {
             comments.addView(temp_linearlayout);
             comments.addView(temp_textview);
         }
+
+        like_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: add to user's favorite list
+            }
+        });
+
+        comment_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(comment_section.getVisibility() == View.VISIBLE)
+                {
+                    comment_section.setVisibility(View.GONE);
+                }
+                else
+                {
+                    comment_section.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        location_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLocationURL()));
+                startActivity(browserIntent);
+            }
+        });
     }
 }

@@ -75,7 +75,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/review_post_comment_section"
                 android:orientation="vertical"
-                android:layout_marginHorizontal="5dp">
+                android:layout_marginHorizontal="5dp"
+                android:visibility="visible">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
