@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WeGO"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CategoryItemListActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".CategoryItemListActivity" />
         <activity android:name=".ReviewPostShow" />
         <activity android:name=".HomeScreenActivity">
             <intent-filter>
@@ -23,7 +24,7 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".ReviewPosts"></activity>
+        <activity android:name=".ReviewPosts" />
 
         <meta-data
             android:name="preloaded_fonts"

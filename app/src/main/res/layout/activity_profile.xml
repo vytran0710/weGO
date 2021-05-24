@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReviewPosts">
+    tools:context=".ProfileActivity">
 
     <RelativeLayout
         android:id="@+id/top_group"
@@ -24,26 +24,30 @@
             android:textColor="#07BEB8"
             android:textSize="50dp" />
 
-        <ImageButton
-            android:id="@+id/search_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/find_vector" />
-
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/top_group"
-        android:id="@+id/review_post_recyclerview"
-        android:paddingBottom="60dp"
-        android:clipToPadding="false" >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/to_login_button_1"
+            android:text="Đăng nhập"
+            android:backgroundTint="#07BEB8">
+        </Button>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/to_register_button_1"
+            android:text="Chưa có tài khoản? Đăng kí tại đây.">
+        </TextView>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/toolbar"
@@ -57,24 +61,24 @@
 
 
         <ImageButton
-            android:id="@+id/home_btn_2"
+            android:id="@+id/home_btn_3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:src="@drawable/home"
+            android:src="@drawable/home_inactive"
             android:background="@drawable/circle" />
 
         <ImageButton
-            android:id="@+id/profile_btn_2"
+            android:id="@+id/profile_btn_3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/profile"
+            android:src="@drawable/profile_active"
             android:background="@drawable/circle" />
 
         <ImageButton
-            android:id="@+id/setting_btn"
+            android:id="@+id/setting_btn_3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

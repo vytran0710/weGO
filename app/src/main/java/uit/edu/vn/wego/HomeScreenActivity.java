@@ -25,6 +25,8 @@ public class HomeScreenActivity extends AppCompatActivity {
     private CardView travel_tips;
     private CardView food;
 
+    private ImageButton profile_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,8 @@ public class HomeScreenActivity extends AppCompatActivity {
         place_by_region = findViewById(R.id.place_by_region);
         travel_tips = findViewById(R.id.travel_tips);
         food = findViewById(R.id.food);
+
+        profile_btn = findViewById(R.id.profile_btn);
 
         Glide.with(this).load("https://photo-cms-sggp.zadn.vn/w580/Uploaded/2021/uhtcplu/2019_03_22/dalat_btbg.jpg").centerCrop().into(famous_place_background_imageview);
         Glide.with(this).load("https://kenh14cdn.com/thumb_w/660/203336854389633024/2021/5/1/img6110-1619861109621834840211.jpg").centerCrop().into(place_by_region_background_imageview);
@@ -77,6 +81,14 @@ public class HomeScreenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), ReviewPosts.class);
                 intent.putExtra("selected_item", "food");
+                startActivity(intent);
+            }
+        });
+
+        profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreenActivity.this,ProfileActivity.class);
                 startActivity(intent);
             }
         });
