@@ -30,7 +30,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:id="@+id/login_group_1">
 
         <Button
             android:layout_width="match_parent"
@@ -46,6 +47,59 @@
             android:id="@+id/to_register_button_1"
             android:text="Chưa có tài khoản? Đăng kí tại đây.">
         </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/profile_group"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_image"
+            android:layout_margin="10dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Name"
+                android:id="@+id/profile_name"
+                android:textSize="20dp"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Username"
+                android:id="@+id/profile_username"
+                android:textSize="20dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/profile_name"/>
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Các bài báo ưa thích"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
 
     </LinearLayout>
 
