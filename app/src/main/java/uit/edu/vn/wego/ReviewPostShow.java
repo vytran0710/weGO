@@ -30,7 +30,7 @@ public class ReviewPostShow extends AppCompatActivity {
 
     private ImageButton like_button;
     private ImageButton comment_button;
-    private ImageButton location_button;
+    private ImageButton location_button;    
 
     private LinearLayout comment_section;
 
