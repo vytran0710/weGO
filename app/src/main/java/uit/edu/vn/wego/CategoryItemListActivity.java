@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -19,6 +23,9 @@ public class CategoryItemListActivity extends AppCompatActivity {
     private RecyclerView recyclerview;
     private ArrayList<ModelItemCategory> array;
 
+    private ImageView home_button;
+    private ImageView profile_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +33,9 @@ public class CategoryItemListActivity extends AppCompatActivity {
 
         selected_category = getIntent().getStringExtra("selected_category");
         recyclerview = findViewById(R.id.category_item_recyclerview);
+
+        home_button = findViewById(R.id.home_btn_1);
+        profile_button = findViewById(R.id.profile_btn_1);
 
         switch(selected_category)
         {
@@ -35,11 +45,23 @@ public class CategoryItemListActivity extends AppCompatActivity {
             case "place_by_region":
                 initialize_place_by_region_category();
                 break;
-            case "travel_tips":
-                break;
-            case "food":
-                break;
         }
+
+        home_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CategoryItemListActivity.this,HomeScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        profile_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CategoryItemListActivity.this,ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initialize_famous_place_category()
@@ -68,24 +90,4 @@ public class CategoryItemListActivity extends AppCompatActivity {
         recyclerview.setAdapter(adapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
     }
-//    private void intialize_travel_tips_category()
-//    {
-//        array = new ArrayList<ModelItemCategory>();
-//        array.add(new ModelItemCategory("Cắm trại",
-//                "https://media.cntraveler.com/photos/607313c3d1058698d13c31b5/16:9/w_2560%2Cc_limit/FamilyCamping-2021-GettyImages-948512452-2.jpg",
-//                "camtrai"));
-//        adapter = new CategoryAdapter(this, array);
-//        recyclerview.setAdapter(adapter);
-//        recyclerview.setLayoutManager(new LinearLayoutManager(this));
-//    }
-//    private void initialize_food_category()
-//    {
-//        array = new ArrayList<ModelItemCategory>();
-//        array.add(new ModelItemCategory("Đà Lạt",
-//                "https://vcdn1-dulich.vnecdn.net/2019/05/23/12-1558593963.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=sEbfKs9N6CgwUja6gayIJA",
-//                "dalat"));
-//        adapter = new CategoryAdapter(this, array);
-//        recyclerview.setAdapter(adapter);
-//        recyclerview.setLayoutManager(new LinearLayoutManager(this));
-//    }
 }

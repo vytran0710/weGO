@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,6 +35,9 @@ public class ReviewPosts extends AppCompatActivity {
     private Context mContext;
     private RequestQueue queue;
 
+    private ImageView home_button;
+    private ImageView profile_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,10 @@ public class ReviewPosts extends AppCompatActivity {
         recyclerView = findViewById(R.id.review_post_recyclerview);
 
         mContext = this;
+
+        home_button = findViewById(R.id.home_btn_2);
+        profile_button = findViewById(R.id.profile_btn_2);
+
         // TODO: Get a list of objects from the database
         item_model = new ArrayList<>();
 
@@ -117,6 +127,22 @@ public class ReviewPosts extends AppCompatActivity {
 //
 //        recyclerView.setAdapter(recycler_adapter);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        home_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReviewPosts.this,HomeScreenActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        profile_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReviewPosts.this,ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private ArrayList<ModelItemReviewPost> setArrayList(ArrayList<ModelItemReviewPost> temp, String tag) {
