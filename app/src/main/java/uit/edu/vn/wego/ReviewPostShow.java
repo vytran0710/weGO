@@ -2,21 +2,36 @@ package uit.edu.vn.wego;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import uit.edu.vn.wego.adapter.ModelItemReviewPost;
 
@@ -33,6 +48,11 @@ public class ReviewPostShow extends AppCompatActivity {
     private ImageButton location_button;    
 
     private LinearLayout comment_section;
+
+    private Button postComment_button;
+    private EditText writeComment_editText;
+
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +77,11 @@ public class ReviewPostShow extends AppCompatActivity {
 
         comment_section = findViewById(R.id.review_post_comment_section);
 
+        postComment_button = findViewById(R.id.post_comment);
+        writeComment_editText = findViewById(R.id.write_comment_edittext);
+
+        queue = Volley.newRequestQueue(this);
+
         for(int i = 0; i < item.getComment().size(); ++i)
         {
             TextView temp_textview = new TextView(this);
@@ -78,6 +103,7 @@ public class ReviewPostShow extends AppCompatActivity {
         like_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                userLikePost();
                 //TODO: add to user's favorite list
             }
         });
@@ -103,5 +129,59 @@ public class ReviewPostShow extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
+
+        postComment_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                DateFormat df = new SimpleDateFormat(("yyyy.M.d 'at' H:m:s"));
+//                String date = df.format(Calendar.getInstance().getTime());
+//                Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    private void userLikePost(){
+        //checkLiked
+        //
+        //DateFormat df = new SimpleDateFormat(("yyyy.M.d 'at' H:m:s"));
+        //String dateNow = df.format(Calendar.getInstance().getTime());
+        //
+
+        String url = "";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        })
+//        {
+//            @Override
+//            public String getBodyContentType() {
+//                return "application/json; charset=utf-8";
+//            }
+//
+//            @Override
+//            public byte[] getBody() {
+//                try {
+//                    DateFormat df = new SimpleDateFormat(("yyyy.M.d 'at' H:m:s"));
+//                    String dateNow = df.format(Calendar.getInstance().getTime());
+//
+//                    return dateNow == null ? null : dateNow.getBytes("utf-8");
+//                } catch (UnsupportedEncodingException uee) {
+//                    //VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+//                    return null;
+//                }
+//            }
+//        }
+        ;
+        queue.add(request);
     }
 }

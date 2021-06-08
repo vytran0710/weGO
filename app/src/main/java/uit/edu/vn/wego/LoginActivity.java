@@ -16,10 +16,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+
+import uit.edu.vn.wego.adapter.ModelItemUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -81,10 +85,22 @@ public class LoginActivity extends AppCompatActivity {
                     } else if (type.equals("login fail")) {
                         Toast.makeText(getApplicationContext(), "Login fail", Toast.LENGTH_SHORT).show();
                     } else {
-                        String token = response.getString("token");
-                        String message = response.getString("message");
-                        Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        JSONObject user = response.getJSONObject("user");
+                        String id = user.getString("_id");
+                        String username = user.getString("username");
+                        String email = user.getString("email");
+                        String fullName = user.getString("fullName");
+                        String avatar = user.getString("avatar");
+                        String token = user.getString("token");
+
+                        JSONArray temp = user.getJSONArray("listComment");
+                        ArrayList<String> likedPostId = new ArrayList<String>();
+                        for (int j = 0; j < temp.length(); j++) {
+                            likedPostId.add(temp.getString(j));
+                        }
+                        ModelItemUser itemUser = new ModelItemUser(id,username,fullName,email,token,avatar,likedPostId);
+                        //Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+
                         Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
