@@ -50,6 +50,10 @@ public class ModelItemUser implements Serializable {
         return likedPostId;
     }
 
+
+    public void setLikedPostId(ArrayList<String> likedPostId) {
+        this.likedPostId = likedPostId;
+    }
 }
 
 

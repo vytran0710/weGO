@@ -3,6 +3,7 @@ package uit.edu.vn.wego;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private RequestQueue queue;
 
+    private static ModelItemUser itemUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+
             }
         });
 
@@ -64,25 +68,24 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     String data = "{" + "\"username\":\"" + username +
                             "\",\"password\":\"" + password + "\"}";
-//                    Toast.makeText(getApplicationContext(), data, Toast.LENGTH_LONG).show();
                     submitLogin(data);
                 }
-
             }
         });
     }
 
     private void submitLogin(String dataSubmit) {
+
         String url = "http://192.168.1.12:3000/user/login";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     String type = response.getString("type");
-//                    Toast.makeText(getApplicationContext(), "type: "+type, Toast.LENGTH_SHORT).show();
+
                     if (type.equals("Not exists user")) {
                         Toast.makeText(getApplicationContext(), "Not exists user", Toast.LENGTH_SHORT).show();
-                    } else if (type.equals("login fail")) {
+                    } else if (type.equals("Login fail")) {
                         Toast.makeText(getApplicationContext(), "Login fail", Toast.LENGTH_SHORT).show();
                     } else {
                         JSONObject user = response.getJSONObject("user");
@@ -93,15 +96,19 @@ public class LoginActivity extends AppCompatActivity {
                         String avatar = user.getString("avatar");
                         String token = user.getString("token");
 
-                        JSONArray temp = user.getJSONArray("listComment");
+                        JSONArray temp = user.getJSONArray("listLikedPostId");
                         ArrayList<String> likedPostId = new ArrayList<String>();
-                        for (int j = 0; j < temp.length(); j++) {
-                            likedPostId.add(temp.getString(j));
+                        for (int i = 0; i < temp.length(); i++) {
+                            likedPostId.add(temp.getString(i));
                         }
-                        ModelItemUser itemUser = new ModelItemUser(id,username,fullName,email,token,avatar,likedPostId);
-                        //Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
+                        setUser(new ModelItemUser(id, username, fullName, email, token, avatar, likedPostId));
+                        Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -129,5 +136,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
         queue.add(request);
+    }
+
+    public static ModelItemUser getUser() {
+        return (itemUser != null) ? itemUser : null;
+    }
+
+    public static void setUser(ModelItemUser user) {
+        itemUser = user;
     }
 }

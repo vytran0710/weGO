@@ -61,4 +61,8 @@ public class ModelItemReviewPost implements Serializable {
     public ArrayList<String> getImgURL() {
         return imgURL;
     }
+
+    public void setComment(ArrayList<String> comment) {
+        this.comment = comment;
+    }
 }

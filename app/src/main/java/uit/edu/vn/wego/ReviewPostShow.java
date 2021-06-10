@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,15 +26,21 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import uit.edu.vn.wego.adapter.ModelItemReviewPost;
+import uit.edu.vn.wego.adapter.ModelItemUser;
 
 public class ReviewPostShow extends AppCompatActivity {
     private ModelItemReviewPost item;
@@ -45,12 +52,14 @@ public class ReviewPostShow extends AppCompatActivity {
 
     private ImageButton like_button;
     private ImageButton comment_button;
-    private ImageButton location_button;    
+    private ImageButton location_button;
 
     private LinearLayout comment_section;
 
     private Button postComment_button;
     private EditText writeComment_editText;
+
+    private ModelItemUser itemUser;
 
     private RequestQueue queue;
 
@@ -80,45 +89,41 @@ public class ReviewPostShow extends AppCompatActivity {
         postComment_button = findViewById(R.id.post_comment);
         writeComment_editText = findViewById(R.id.write_comment_edittext);
 
-        queue = Volley.newRequestQueue(this);
-
-        for(int i = 0; i < item.getComment().size(); ++i)
-        {
-            TextView temp_textview = new TextView(this);
-            temp_textview.setText(item.getComment().get(i));
-            temp_textview.setTextSize(20);
-            temp_textview.setTextColor(getResources().getColor(R.color.black));
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0,10,0,10);
-            temp_textview.setLayoutParams(params);
-
-            LinearLayout temp_linearlayout = new LinearLayout(this);
-            temp_linearlayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
-            temp_linearlayout.setBackgroundColor(getResources().getColor(R.color.black));
-            comments.addView(temp_linearlayout);
-            comments.addView(temp_textview);
+        if (LoginActivity.getUser() != null) {
+            itemUser = LoginActivity.getUser();
         }
+
+        loadComment();
+
+        queue = Volley.newRequestQueue(this);
 
         like_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userLikePost();
-                //TODO: add to user's favorite list
+                userLike_UnLikePost();
             }
         });
 
         comment_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(comment_section.getVisibility() == View.VISIBLE)
-                {
+                if (comment_section.getVisibility() == View.VISIBLE) {
                     comment_section.setVisibility(View.GONE);
-                }
-                else
-                {
+                } else {
                     comment_section.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        postComment_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String comment = writeComment_editText.getText().toString().trim();
+                if (!comment.isEmpty()) {
+                    String dataSubmit = "{" + "\"comment\":\"" + comment + "\"}";
+                    userCommentPost(dataSubmit);
+                }
+
             }
         });
 
@@ -130,58 +135,138 @@ public class ReviewPostShow extends AppCompatActivity {
             }
         });
 
-        postComment_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                DateFormat df = new SimpleDateFormat(("yyyy.M.d 'at' H:m:s"));
-//                String date = df.format(Calendar.getInstance().getTime());
-//                Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-    private void userLikePost(){
-        //checkLiked
-        //
-        //DateFormat df = new SimpleDateFormat(("yyyy.M.d 'at' H:m:s"));
-        //String dateNow = df.format(Calendar.getInstance().getTime());
-        //
 
-        String url = "";
+    }
+
+    private void loadComment(){
+        comments.removeAllViews();
+        for (int i = 0; i < item.getComment().size(); ++i) {
+            TextView temp_textview = new TextView(this);
+            temp_textview.setText(item.getComment().get(i));
+            temp_textview.setTextSize(20);
+            temp_textview.setTextColor(getResources().getColor(R.color.black));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0, 10, 0, 10);
+            temp_textview.setLayoutParams(params);
+
+            LinearLayout temp_linearlayout = new LinearLayout(this);
+            temp_linearlayout.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
+            temp_linearlayout.setBackgroundColor(getResources().getColor(R.color.black));
+            comments.addView(temp_linearlayout);
+            comments.addView(temp_textview);
+        }
+    }
+
+    private void userLike_UnLikePost() {
+
+        if (itemUser == null) {
+            Toast.makeText(getApplicationContext(), "You must to login", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //TODO: check if like or unlike
+
+        String url = "http://192.168.1.12:3000/user/" + itemUser.getId() + "/like/" + item.getId();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+                    String message = response.getString("message");
+                    if (message.equals("done")) {
+                        Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
 
-                }catch (Exception e){
+                        JSONArray temp = response.getJSONArray("newList");
+                        ArrayList<String> newListLiked = new ArrayList<String>();
+                        for (int i = 0; i < temp.length(); i++) {
+                            newListLiked.add(temp.getString(i));
+                        }
+                        itemUser.setLikedPostId(newListLiked);
+                        LoginActivity.setUser(itemUser);
+
+                    }
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
-        })
-//        {
-//            @Override
-//            public String getBodyContentType() {
-//                return "application/json; charset=utf-8";
-//            }
-//
-//            @Override
-//            public byte[] getBody() {
-//                try {
-//                    DateFormat df = new SimpleDateFormat(("yyyy.M.d 'at' H:m:s"));
-//                    String dateNow = df.format(Calendar.getInstance().getTime());
-//
-//                    return dateNow == null ? null : dateNow.getBytes("utf-8");
-//                } catch (UnsupportedEncodingException uee) {
-//                    //VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-//                    return null;
-//                }
-//            }
-//        }
-        ;
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("Authorization", itemUser.getToken());
+                return params;
+            }
+        };
+        queue.add(request);
+    }
+
+    private void userCommentPost(String comment) {
+
+        if (itemUser == null) {
+            Toast.makeText(getApplicationContext(), "You must to login", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String url = "http://192.168.1.12:3000/user/" + itemUser.getId() + "/comment/" + item.getId();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String message = response.getString("message");
+                    if (message.equals("comment success")) {
+                        Toast.makeText(getApplicationContext(), "comment", Toast.LENGTH_SHORT).show();
+
+                        JSONArray temp = response.getJSONArray("newList");
+                        ArrayList<String> newListComment = new ArrayList<String>();
+                        for (int i = 0; i < temp.length(); i++) {
+                            newListComment.add(temp.getString(i));
+                        }
+                        item.setComment(newListComment);
+                        loadComment();
+                        //TODO: set enter key
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() {
+                try {
+                    return comment == null ? null : comment.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    //VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                    return null;
+                }
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Content-Type", "application/json; charset=UTF-8");
+                params.put("Authorization", itemUser.getToken());
+                return params;
+            }
+        };
         queue.add(request);
     }
 }

@@ -66,8 +66,12 @@ public class RegisterActivity extends AppCompatActivity {
                     String data = "{" + "\"username\":\"" + username +
                             "\",\"email\":\"" + email +
                             "\",\"password\":\"" + pw + "\"}";
-                    Log.d("data",data);
+                    //Log.d("data",data);
                     submitSignUp(data);
+
+                    Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                    startActivity(intent);
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Password doesn't match, please type again", Toast.LENGTH_SHORT).show();
                 }
@@ -78,21 +82,17 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void submitSignUp(String dataSubmit) {
         String url = "http://192.168.1.12:3000/user/signup";
-//        Toast.makeText(getApplicationContext(), "i'm here", Toast.LENGTH_SHORT).show();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-//                Toast.makeText(getApplicationContext(), "i'm here", Toast.LENGTH_SHORT).show();
                 try {
                     String message = response.getString("message");
-                    Toast.makeText(getApplicationContext(), "message: "+message, Toast.LENGTH_SHORT).show();
                     if (message.equals("Username exists")) {
                         Toast.makeText(getApplicationContext(), "Username exists", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "Create successful", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
-//                    Toast.makeText(getApplicationContext(), "i'm here1", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
 
