@@ -54,7 +54,7 @@ public class ReviewPosts extends AppCompatActivity {
 
         queue = Volley.newRequestQueue(this);
         //volley//
-        String url = "http://192.168.1.12:3000/post/";
+        String url = "https://we-go-app2021.herokuapp.com/post/";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

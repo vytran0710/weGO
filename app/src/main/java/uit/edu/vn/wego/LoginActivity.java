@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void submitLogin(String dataSubmit) {
 
-        String url = "http://192.168.1.12:3000/user/login";
+        String url = "https://we-go-app2021.herokuapp.com/user/login";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

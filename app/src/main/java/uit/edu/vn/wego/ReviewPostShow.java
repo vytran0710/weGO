@@ -166,7 +166,7 @@ public class ReviewPostShow extends AppCompatActivity {
         }
         //TODO: check if like or unlike
 
-        String url = "http://192.168.1.12:3000/user/" + itemUser.getId() + "/like/" + item.getId();
+        String url = "https://we-go-app2021.herokuapp.com/user/" + itemUser.getId() + "/like/" + item.getId();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -212,7 +212,7 @@ public class ReviewPostShow extends AppCompatActivity {
             return;
         }
 
-        String url = "http://192.168.1.12:3000/user/" + itemUser.getId() + "/comment/" + item.getId();
+        String url = "https://we-go-app2021.herokuapp.com/user/" + itemUser.getId() + "/comment/" + item.getId();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

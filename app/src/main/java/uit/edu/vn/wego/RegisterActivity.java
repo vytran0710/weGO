@@ -81,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void submitSignUp(String dataSubmit) {
-        String url = "http://192.168.1.12:3000/user/signup";
+        String url = "https://we-go-app2021.herokuapp.com/user/signup";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
