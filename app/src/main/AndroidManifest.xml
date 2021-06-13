@@ -14,7 +14,8 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".CategoryItemListActivity" />
-        <activity android:name=".ReviewPostShow" />
+        <activity android:name=".ReviewPostShow"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".HomeScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".RegisterActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ReviewPosts" />
 
         <meta-data
