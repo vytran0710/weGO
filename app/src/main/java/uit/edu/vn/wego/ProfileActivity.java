@@ -1,15 +1,20 @@
 package uit.edu.vn.wego;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
@@ -27,6 +32,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ModelItemUser itemUser;
 
+    private ImageView profile_image;
+    private TextView profile_name;
+    private TextView profile_username;
+    private CardView favorite_articles;
+
+    private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +51,13 @@ public class ProfileActivity extends AppCompatActivity {
         profile_group = findViewById(R.id.profile_group);
         login_Group = findViewById(R.id.login_group_1);
 
+        profile_image = findViewById(R.id.profile_image);
+        profile_name = findViewById(R.id.profile_name);
+        profile_username = findViewById(R.id.profile_username);
+        favorite_articles = findViewById(R.id.favorite_articles);
+
+        context = this;
+
         if (LoginActivity.getUser() == null) {
             profile_group.setVisibility(View.GONE);
             login_Group.setVisibility(View.VISIBLE);
@@ -47,7 +66,13 @@ public class ProfileActivity extends AppCompatActivity {
             profile_group.setVisibility(View.VISIBLE);
             login_Group.setVisibility(View.GONE);
             itemUser = LoginActivity.getUser();
-            //TODO: dump itemUser into layout
+
+            Glide.with(context)
+                    .load(itemUser.getAvatar())
+                    .circleCrop()
+                    .into(profile_image);
+            profile_name.setText(itemUser.getFullName());
+            profile_username.setText(itemUser.getUsername());
         }
 
         home_btn.setOnClickListener(new View.OnClickListener() {
