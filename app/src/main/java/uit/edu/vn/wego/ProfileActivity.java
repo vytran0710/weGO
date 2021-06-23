@@ -3,6 +3,7 @@ package uit.edu.vn.wego;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import uit.edu.vn.wego.adapter.ModelItemUser;
 public class ProfileActivity extends AppCompatActivity {
 
     private ImageButton home_btn;
+    private ImageButton fav_button;
 
     private Button to_login_btn;
     private TextView to_register_btn;
@@ -45,6 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         home_btn = findViewById(R.id.home_btn_3);
+        fav_button = findViewById(R.id.fav_btn_3);
+
         to_login_btn = findViewById(R.id.to_login_button_1);
         to_register_btn = findViewById(R.id.to_register_button_1);
 
@@ -80,6 +84,23 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, HomeScreenActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        fav_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModelItemUser user = LoginActivity.getUser();
+                if(user != null)
+                {
+                    Intent intent = new Intent(v.getContext(), ReviewPosts.class);
+                    intent.putExtra("selected_item", "user_fav_list");
+                    ((Activity)v.getContext()).startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(v.getContext(), "Please login first.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

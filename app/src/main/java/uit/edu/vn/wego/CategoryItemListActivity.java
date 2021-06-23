@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import uit.edu.vn.wego.R;
 import uit.edu.vn.wego.adapter.CategoryAdapter;
 import uit.edu.vn.wego.adapter.ModelItemCategory;
+import uit.edu.vn.wego.adapter.ModelItemUser;
 
 public class CategoryItemListActivity extends AppCompatActivity {
 
@@ -25,6 +28,7 @@ public class CategoryItemListActivity extends AppCompatActivity {
 
     private ImageView home_button;
     private ImageView profile_button;
+    private ImageView fav_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class CategoryItemListActivity extends AppCompatActivity {
 
         home_button = findViewById(R.id.home_btn_1);
         profile_button = findViewById(R.id.profile_btn_1);
+        fav_button = findViewById(R.id.fav_btn_1);
 
         switch(selected_category)
         {
@@ -60,6 +65,23 @@ public class CategoryItemListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryItemListActivity.this,ProfileActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        fav_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModelItemUser user = LoginActivity.getUser();
+                if(user != null)
+                {
+                    Intent intent = new Intent(v.getContext(), ReviewPosts.class);
+                    intent.putExtra("selected_item", "user_fav_list");
+                    ((Activity)v.getContext()).startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(v.getContext(), "Please login first.", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

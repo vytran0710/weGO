@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,9 +24,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import uit.edu.vn.wego.adapter.ModelItemReviewPost;
+import uit.edu.vn.wego.adapter.ModelItemUser;
 import uit.edu.vn.wego.adapter.RecyclerAdapter;
 
 public class ReviewPosts extends AppCompatActivity {
@@ -37,6 +41,9 @@ public class ReviewPosts extends AppCompatActivity {
 
     private ImageView home_button;
     private ImageView profile_button;
+    private ImageView fav_button;
+
+    private ProgressBar review_post_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +55,15 @@ public class ReviewPosts extends AppCompatActivity {
 
         home_button = findViewById(R.id.home_btn_2);
         profile_button = findViewById(R.id.profile_btn_2);
+        fav_button = findViewById(R.id.fav_btn_2);
+
+        review_post_loading = findViewById(R.id.review_post_loading);
+
+        if (getIntent().getStringExtra("selected_item").equals("user_fav_list"))
+        {
+            home_button.setImageResource(R.drawable.home_inactive);
+            fav_button.setImageResource(R.drawable.like);
+        }
 
         // TODO: Get a list of objects from the database
         item_model = new ArrayList<>();
@@ -120,15 +136,53 @@ public class ReviewPosts extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        fav_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModelItemUser user = LoginActivity.getUser();
+                if(user != null)
+                {
+                    Intent intent = new Intent(v.getContext(), ReviewPosts.class);
+                    intent.putExtra("selected_item", "user_fav_list");
+                    ((Activity)v.getContext()).startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(v.getContext(), "Please login first.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private ArrayList<ModelItemReviewPost> setArrayList(ArrayList<ModelItemReviewPost> temp, String tag) {
-        for (int i = 0; i < temp.size(); ++i) {
-            if (!temp.get(i).getTag().contains(tag)) {
-                temp.remove(i);
-                --i;
+        if(tag.equals("user_fav_list"))
+        {
+            ModelItemUser user = LoginActivity.getUser();
+            ArrayList<ModelItemReviewPost> temp1 = new ArrayList<>();
+            for (int i = 0; i < temp.size(); ++i)
+            {
+                for (int j = 0; j < user.getLikedPostId().size(); ++j)
+                {
+                    if(user.getLikedPostId().get(j).equals(temp.get(i).getId()))
+                    {
+                        temp1.add(temp.get(i));
+                    }
+                }
             }
+            review_post_loading.setVisibility(View.GONE);
+            return temp1;
         }
-        return temp;
+        else
+        {
+            for (int i = 0; i < temp.size(); ++i) {
+                if (!temp.get(i).getTag().contains(tag)) {
+                    temp.remove(i);
+                    --i;
+                }
+            }
+            review_post_loading.setVisibility(View.GONE);
+            return temp;
+        }
     }
 }

@@ -74,13 +74,20 @@
             android:background="@drawable/circle" />
 
         <ImageButton
-            android:id="@+id/setting_btn"
+            android:id="@+id/fav_btn_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/setting"
+            android:src="@drawable/like_white"
             android:background="@drawable/circle" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/review_post_loading"
+        android:layout_centerInParent="true"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

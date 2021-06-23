@@ -10,8 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import uit.edu.vn.wego.adapter.ModelItemUser;
 
 public class HomeScreenActivity extends AppCompatActivity {
 
@@ -26,6 +29,7 @@ public class HomeScreenActivity extends AppCompatActivity {
     private CardView food;
 
     private ImageButton profile_btn;
+    private ImageButton fav_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,24 @@ public class HomeScreenActivity extends AppCompatActivity {
         food = findViewById(R.id.food);
 
         profile_btn = findViewById(R.id.profile_btn);
+        fav_btn = findViewById(R.id.fav_btn);
+
+        fav_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ModelItemUser user = LoginActivity.getUser();
+                if(user != null)
+                {
+                    Intent intent = new Intent(v.getContext(), ReviewPosts.class);
+                    intent.putExtra("selected_item", "user_fav_list");
+                    ((Activity)v.getContext()).startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(v.getContext(), "Please login first.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         Glide.with(this).load("https://photo-cms-sggp.zadn.vn/w580/Uploaded/2021/uhtcplu/2019_03_22/dalat_btbg.jpg").centerCrop().into(famous_place_background_imageview);
         Glide.with(this).load("https://kenh14cdn.com/thumb_w/660/203336854389633024/2021/5/1/img6110-1619861109621834840211.jpg").centerCrop().into(place_by_region_background_imageview);
