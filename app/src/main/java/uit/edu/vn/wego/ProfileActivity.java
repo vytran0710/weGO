@@ -58,7 +58,6 @@ public class ProfileActivity extends AppCompatActivity {
         profile_image = findViewById(R.id.profile_image);
         profile_name = findViewById(R.id.profile_name);
         profile_username = findViewById(R.id.profile_username);
-        favorite_articles = findViewById(R.id.favorite_articles);
 
         context = this;
 

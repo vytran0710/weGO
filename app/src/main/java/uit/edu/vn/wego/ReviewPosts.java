@@ -107,6 +107,7 @@ public class ReviewPosts extends AppCompatActivity {
                     recycler_adapter = new RecyclerAdapter(mContext, filtered_item);
                     recyclerView.setAdapter(recycler_adapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+                    review_post_loading.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -170,7 +171,6 @@ public class ReviewPosts extends AppCompatActivity {
                     }
                 }
             }
-            review_post_loading.setVisibility(View.GONE);
             return temp1;
         }
         else
@@ -181,7 +181,6 @@ public class ReviewPosts extends AppCompatActivity {
                     --i;
                 }
             }
-            review_post_loading.setVisibility(View.GONE);
             return temp;
         }
     }
