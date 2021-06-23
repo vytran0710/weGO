@@ -206,7 +206,7 @@ public class ReviewPostShow extends AppCompatActivity {
     private boolean userLike_UnLikePost(String status) {
 
         if (itemUser == null) {
-            Toast.makeText(getApplicationContext(), "You must to login", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "You must login", Toast.LENGTH_SHORT).show();
             return false;
         }
         //TODO: check if like or unlike
@@ -218,7 +218,7 @@ public class ReviewPostShow extends AppCompatActivity {
                 try {
                     String message = response.getString("message");
                     if (message.equals("done")) {
-                        Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getApplicationContext(), "Added to favorite list", Toast.LENGTH_SHORT).show();
 
                         JSONArray temp = response.getJSONArray("newList");
                         ArrayList<String> newListLiked = new ArrayList<String>();
@@ -258,7 +258,7 @@ public class ReviewPostShow extends AppCompatActivity {
     private void userCommentPost(String comment) {
 
         if (itemUser == null) {
-            Toast.makeText(getApplicationContext(), "You must to login", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "You must login", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -269,7 +269,7 @@ public class ReviewPostShow extends AppCompatActivity {
                 try {
                     String message = response.getString("message");
                     if (message.equals("comment success")) {
-                        Toast.makeText(getApplicationContext(), "comment", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Comment posted", Toast.LENGTH_SHORT).show();
 
                         JSONArray temp = response.getJSONArray("newList");
                         ArrayList<String> newListComment = new ArrayList<String>();
@@ -281,7 +281,7 @@ public class ReviewPostShow extends AppCompatActivity {
                         //TODO: set enter key
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Comment is not posted", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {

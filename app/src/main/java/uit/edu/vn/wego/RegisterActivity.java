@@ -61,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String confirmPw = txtConfirmPassword.getText().toString();
 
                 if (username.equals("") || email.equals("") || pw.equals("") || confirmPw.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Dien day du thong tin", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "More information required", Toast.LENGTH_SHORT).show();
                 } else if (pw.equals(confirmPw)) {
                     String data = "{" + "\"username\":\"" + username +
                             "\",\"email\":\"" + email +
@@ -73,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent);
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "Password doesn't match, please type again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Password doesn't match, please try again", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -88,19 +88,18 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     String message = response.getString("message");
                     if (message.equals("Username exists")) {
-                        Toast.makeText(getApplicationContext(), "Username exists", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Existed user, please log in", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Create successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Account created successfully", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error, account was not created", Toast.LENGTH_LONG).show();
             }
         }) {
             @Override

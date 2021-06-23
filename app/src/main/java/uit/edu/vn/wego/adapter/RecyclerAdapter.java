@@ -168,7 +168,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         RequestQueue queue = Volley.newRequestQueue(context);
 
         if (itemUser == null) {
-            Toast.makeText(context, "You must to login", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "You must login", Toast.LENGTH_SHORT).show();
             return false;
         }
         //TODO: check if like or unlike
@@ -180,7 +180,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                 try {
                     String message = response.getString("message");
                     if (message.equals("done")) {
-                        Toast.makeText(context, "done", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(context, "Added to favorite list", Toast.LENGTH_SHORT).show();
 
                         JSONArray temp = response.getJSONArray("newList");
                         ArrayList<String> newListLiked = new ArrayList<String>();

@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = txtPassword.getText().toString();
 
                 if (username.equals("") || password.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "More information required", Toast.LENGTH_SHORT).show();
                 } else {
                     String data = "{" + "\"username\":\"" + username +
                             "\",\"password\":\"" + password + "\"}";
@@ -83,9 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                     String type = response.getString("type");
 
                     if (type.equals("Not exists user")) {
-                        Toast.makeText(getApplicationContext(), "Not exists user", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_SHORT).show();
                     } else if (type.equals("Login fail")) {
-                        Toast.makeText(getApplicationContext(), "Login fail", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Username or password is invalid", Toast.LENGTH_SHORT).show();
                     } else {
                         JSONObject user = response.getJSONObject("user");
                         String id = user.getString("_id");
@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                         setUser(new ModelItemUser(id, username, fullName, email, token, avatar, likedPostId));
-                        Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Login successfully", Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
