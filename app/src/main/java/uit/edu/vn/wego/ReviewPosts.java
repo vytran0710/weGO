@@ -160,6 +160,17 @@ public class ReviewPosts extends AppCompatActivity {
         if(tag.equals("user_fav_list"))
         {
             ModelItemUser user = LoginActivity.getUser();
+            fav_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            if (user.getLikedPostId().size() == 0)
+            {
+                Toast.makeText(this, "You don't have any favorite posts.", Toast.LENGTH_SHORT).show();
+                return new ArrayList<ModelItemReviewPost>();
+            }
             ArrayList<ModelItemReviewPost> temp1 = new ArrayList<>();
             for (int i = 0; i < temp.size(); ++i)
             {
