@@ -27,6 +27,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -159,6 +161,16 @@ public class ReviewPostShow extends AppCompatActivity {
             public void onClick(View v) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLocationURL()));
                 startActivity(browserIntent);
+            }
+        });
+
+        Fresco.initialize(this);
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ImageViewer.Builder(ReviewPostShow.this, item.getImgURL())
+                        .show();
             }
         });
     }
