@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +43,7 @@ import java.util.Map;
 
 import uit.edu.vn.wego.adapter.ModelItemReviewPost;
 import uit.edu.vn.wego.adapter.ModelItemUser;
+import uit.edu.vn.wego.adapter.RecyclerAdapter;
 
 public class ReviewPostShow extends AppCompatActivity {
     private ModelItemReviewPost item;
@@ -51,6 +54,7 @@ public class ReviewPostShow extends AppCompatActivity {
     private LinearLayout comments;
 
     private ImageButton like_button;
+    private ImageButton unlike_button;
     private ImageButton comment_button;
     private ImageButton location_button;
 
@@ -81,6 +85,8 @@ public class ReviewPostShow extends AppCompatActivity {
         Glide.with(this).load(item.getImgURL().get(0)).into(image);
 
         like_button = findViewById(R.id.like_btn_reviewpost);
+        unlike_button = findViewById(R.id.unlike_btn_reviewpost);
+
         comment_button = findViewById(R.id.cmt_btn_reviewpost);
         location_button = findViewById(R.id.map_btn_reviewpost);
 
@@ -93,6 +99,14 @@ public class ReviewPostShow extends AppCompatActivity {
             itemUser = LoginActivity.getUser();
         }
 
+        if(getIntent().getStringExtra("likeStatus").equals("like_gone")){
+            like_button.setVisibility(View.GONE);
+            unlike_button.setVisibility((View.VISIBLE));
+        }else{
+            like_button.setVisibility(View.VISIBLE);
+            unlike_button.setVisibility(View.GONE);
+        }
+
         loadComment();
 
         queue = Volley.newRequestQueue(this);
@@ -100,7 +114,20 @@ public class ReviewPostShow extends AppCompatActivity {
         like_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userLike_UnLikePost();
+                if(userLike_UnLikePost("like")){
+                    like_button.setVisibility(View.GONE);
+                    unlike_button.setVisibility((View.VISIBLE));
+                }
+            }
+        });
+
+        unlike_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(userLike_UnLikePost("unlike")){
+                    like_button.setVisibility(View.VISIBLE);
+                    unlike_button.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -134,8 +161,14 @@ public class ReviewPostShow extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
+    }
 
-
+    @Override
+    public void onBackPressed() {
+//        Intent intent = new Intent(this, ReviewPosts.class);
+//        startActivity(intent);
+//        finish();
+        super.onBackPressed();
     }
 
     private void loadComment(){
@@ -158,15 +191,15 @@ public class ReviewPostShow extends AppCompatActivity {
         }
     }
 
-    private void userLike_UnLikePost() {
+    private boolean userLike_UnLikePost(String status) {
 
         if (itemUser == null) {
             Toast.makeText(getApplicationContext(), "You must to login", Toast.LENGTH_SHORT).show();
-            return;
+            return false;
         }
         //TODO: check if like or unlike
 
-        String url = "https://we-go-app2021.herokuapp.com/user/" + itemUser.getId() + "/like/" + item.getId();
+        String url = "https://we-go-app2021.herokuapp.com/user/" + itemUser.getId() + "/"+status+"/" + item.getId();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -191,7 +224,11 @@ public class ReviewPostShow extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(ReviewPostShow.this, HomeScreenActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(intent);
+
+                //Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override
@@ -203,6 +240,7 @@ public class ReviewPostShow extends AppCompatActivity {
             }
         };
         queue.add(request);
+        return true;
     }
 
     private void userCommentPost(String comment) {
@@ -241,7 +279,11 @@ public class ReviewPostShow extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ReviewPostShow.this, HomeScreenActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
+                //Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         }) {
             @Override

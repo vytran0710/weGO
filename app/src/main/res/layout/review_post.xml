@@ -56,13 +56,31 @@
             android:background="@color/teal"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/like_btn"
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/transparent"
-                android:src="@drawable/like"></ImageButton>
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/like_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    android:backgroundTint="@android:color/transparent"
+                    android:src="@drawable/like"></ImageButton>
+
+                <ImageButton
+                    android:id="@+id/unlike_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:backgroundTint="@android:color/transparent"
+                    android:src="@drawable/unlike"></ImageButton>
+
+            </FrameLayout>
+
 
             <ImageButton
                 android:id="@+id/cmt_btn"

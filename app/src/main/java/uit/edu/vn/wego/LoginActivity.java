@@ -3,7 +3,6 @@ package uit.edu.vn.wego;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = txtPassword.getText().toString();
 
                 if (username.equals("") || password.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Dien day du thong tin", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
                     String data = "{" + "\"username\":\"" + username +
                             "\",\"password\":\"" + password + "\"}";
