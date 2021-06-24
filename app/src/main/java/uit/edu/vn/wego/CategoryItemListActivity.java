@@ -89,6 +89,9 @@ public class CategoryItemListActivity extends AppCompatActivity {
     private void initialize_famous_place_category()
     {
         array = new ArrayList<ModelItemCategory>();
+        array.add(new ModelItemCategory("Hạ Long",
+                "https://owa.bestprice.vn/images/tours/uploads/ha-long-tuan-chau-2-ngay-1-dem-5e5642a3b1b03.jpg",
+                "halong"));
         array.add(new ModelItemCategory("Đà Lạt",
                 "https://vcdn1-dulich.vnecdn.net/2019/05/23/12-1558593963.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=sEbfKs9N6CgwUja6gayIJA",
                 "dalat"));
@@ -99,15 +102,15 @@ public class CategoryItemListActivity extends AppCompatActivity {
     private void initialize_place_by_region_category()
     {
         array = new ArrayList<ModelItemCategory>();
-        array.add(new ModelItemCategory("Miền Nam",
-                "http://tiasang.com.vn/Portals/0/Images/Tac-dong-kinh-te-DBSCL-a1.jpg",
-                "miennam"));
+        array.add(new ModelItemCategory("Miền Bắc",
+                "https://cdn.yeudulich.com/media/cms/8a/18/8168-f0df-4531-a5f7-806bd60a7728.jpg",
+                "mienbac"));
         array.add(new ModelItemCategory("Miền Trung",
                 "https://odt.vn/storage/01-2021/tay-nguyen-don-mot-loat-du-an-cua-cac-ong-lon.jpg",
                 "mientrung"));
-        array.add(new ModelItemCategory("Miền Bắc",
-                "https://lh3.googleusercontent.com/proxy/6ZEsfyLdKbDFFiYfv6AHvfB8eakkNlO3KV1x0j4i37g3NyoFGsVloNq1zjrZhKk6U1JAmBKZt7ISWkts1cw6PR4C0TQqUODUpN7oqWDqL2rXuEP2J4OmrqCrXn5AHNRjlgSKGCTRC5W6xMW0e8lAt_YiR9ovcwdBzpzKR8GPyYksvINMMwWDHa46AZ0HFAIA1P1mxB19ulCUZ7EiG241XzpZWIuCLQ",
-                "mienbac"));
+        array.add(new ModelItemCategory("Miền Nam",
+                "http://tiasang.com.vn/Portals/0/Images/Tac-dong-kinh-te-DBSCL-a1.jpg",
+                "miennam"));
         adapter = new CategoryAdapter(this, array);
         recyclerview.setAdapter(adapter);
         recyclerview.setLayoutManager(new LinearLayoutManager(this));
