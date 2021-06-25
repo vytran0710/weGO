@@ -50,9 +50,16 @@ public class ModelItemUser implements Serializable {
         return likedPostId;
     }
 
-
     public void setLikedPostId(ArrayList<String> likedPostId) {
         this.likedPostId = likedPostId;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
 

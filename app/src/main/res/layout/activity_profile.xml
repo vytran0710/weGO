@@ -24,6 +24,17 @@
             android:textColor="#07BEB8"
             android:textSize="50dp" />
 
+        <ImageButton
+            android:id="@+id/edit_profile_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/edit_profile"
+            android:visibility="visible"/>
+
+
     </RelativeLayout>
 
     <LinearLayout

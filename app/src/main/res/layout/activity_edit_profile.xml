@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:id="@+id/top_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:id="@+id/logo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:fontFamily="@font/righteous"
+            android:paddingLeft="15dp"
+            android:text="@string/wego"
+            android:textAppearance="@style/wego"
+            android:textColor="#07BEB8"
+            android:textSize="50sp"
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:id="@+id/apply_edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/apply"
+            android:visibility="visible"/>
+
+        <ImageButton
+            android:id="@+id/cancel_edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_toStartOf="@+id/apply_edit_btn"
+            android:layout_toLeftOf="@+id/apply_edit_btn"
+            android:backgroundTint="@color/white"
+            android:visibility="visible"
+            app:srcCompat="@drawable/cancel" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/edit_profile_photo_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_group"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_profile_image"
+            android:layout_margin="10dp"/>
+        <TextView
+            android:id="@+id/change_profile_photo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:textColor="#0099FF"
+            android:text="Change Profile Photo"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/edit_profile_info_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_profile_photo_group"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="15dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Full name"
+            android:textColor="#07BEB8"
+            android:textSize="20sp" />
+        <EditText
+            android:id="@+id/fullName_editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="123"
+            android:textSize="25sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="20sp"
+            android:textColor="#07BEB8"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/email_editText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="abc@xyz.com"
+            android:textSize="25sp"/>
+
+    </LinearLayout>
+
+    <ImageButton
+
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/log_out"/>
+
+</RelativeLayout>

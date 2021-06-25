@@ -25,6 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ImageButton home_btn;
     private ImageButton fav_button;
+    private ImageButton edit_profile_btn;
 
     private Button to_login_btn;
     private TextView to_register_btn;
@@ -48,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         home_btn = findViewById(R.id.home_btn_3);
         fav_button = findViewById(R.id.fav_btn_3);
+        edit_profile_btn = findViewById(R.id.edit_profile_btn);
 
         to_login_btn = findViewById(R.id.to_login_button_1);
         to_register_btn = findViewById(R.id.to_register_button_1);
@@ -64,10 +66,12 @@ public class ProfileActivity extends AppCompatActivity {
         if (LoginActivity.getUser() == null) {
             profile_group.setVisibility(View.GONE);
             login_Group.setVisibility(View.VISIBLE);
+            edit_profile_btn.setVisibility(View.GONE);
             itemUser = null;
         } else {
             profile_group.setVisibility(View.VISIBLE);
             login_Group.setVisibility(View.GONE);
+            edit_profile_btn.setVisibility(View.VISIBLE);
             itemUser = LoginActivity.getUser();
 
             Glide.with(context)
@@ -115,6 +119,14 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfileActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        edit_profile_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this,EditProfileActivity.class);
                 startActivity(intent);
             }
         });
