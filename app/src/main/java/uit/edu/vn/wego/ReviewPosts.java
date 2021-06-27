@@ -8,7 +8,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -202,6 +204,78 @@ public class ReviewPosts extends AppCompatActivity {
                 }
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(search_edit_text.getWindowToken(), 0);
+            }
+        });
+
+        search_edit_text.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    String query = search_edit_text.getText().toString().toLowerCase();
+                    item_model = new ArrayList<>();
+                    if (!query.equals(""))
+                    {
+                        review_post_loading.setVisibility(View.VISIBLE);
+                        String url = "https://we-go-app2021.herokuapp.com/post/";
+                        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    JSONArray array = response.getJSONArray("data");
+
+                                    for (int i = 0; i < array.length(); i++) {
+                                        JSONObject reviewPost = array.getJSONObject(i);
+
+                                        String post_id = reviewPost.getString("_id");
+                                        String post_update_date = reviewPost.getString("update_date");
+                                        String post_tag = reviewPost.getString("tag");
+                                        String post_title = reviewPost.getString("title");
+                                        String post_locationURL = reviewPost.getString("locationURL");
+                                        String post_content = reviewPost.getString("content");
+
+                                        JSONArray tempComment = reviewPost.getJSONArray("listComment");
+                                        ArrayList<String> post_listComment = new ArrayList<String>();
+                                        for (int j = 0; j < tempComment.length(); j++) {
+                                            post_listComment.add(tempComment.getString(j));
+                                        }
+
+                                        JSONArray tempImage = reviewPost.getJSONArray("listImage");
+                                        ArrayList<String> post_listImage = new ArrayList<String>();
+                                        for (int j = 0; j < tempImage.length(); j++) {
+                                            post_listImage.add(tempImage.getString(j));
+                                        }
+
+                                        if (post_title.toLowerCase().contains(query) || post_id.toLowerCase().contains(query) || post_tag.toLowerCase().contains(query))
+                                        {
+                                            item_model.add(new ModelItemReviewPost(post_id, post_update_date, post_tag, post_title, post_locationURL, post_content, 0, post_listComment, post_listImage));
+                                        }
+                                    }
+
+                                    recycler_adapter = new RecyclerAdapter(mContext, item_model);
+                                    recyclerView.setAdapter(recycler_adapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+                                    recycler_adapter.notifyDataSetChanged();
+
+                                    review_post_loading.setVisibility(View.GONE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+
+                                    review_post_loading.setVisibility(View.GONE);
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                error.printStackTrace();
+                            }
+                        });
+                        queue.add(request);
+                    }
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(search_edit_text.getWindowToken(), 0);
+                    return true;
+                }
+                return false;
             }
         });
     }

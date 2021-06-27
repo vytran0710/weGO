@@ -31,6 +31,9 @@
             android:layout_toLeftOf="@id/search_btn"
             android:layout_centerVertical="true"
             android:id="@+id/search_edit_text"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"
+            android:layout_marginLeft="10dp"
             android:visibility="gone"/>
 
         <ImageButton
