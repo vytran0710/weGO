@@ -24,6 +24,15 @@
             android:textColor="#07BEB8"
             android:textSize="50dp" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/logo2"
+            android:layout_toLeftOf="@id/search_btn"
+            android:layout_centerVertical="true"
+            android:id="@+id/search_edit_text"
+            android:visibility="gone"/>
+
         <ImageButton
             android:id="@+id/search_btn"
             android:layout_width="wrap_content"

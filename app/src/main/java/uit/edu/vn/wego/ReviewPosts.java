@@ -8,9 +8,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -44,6 +49,9 @@ public class ReviewPosts extends AppCompatActivity {
     private ImageView fav_button;
 
     private ProgressBar review_post_loading;
+    private ImageButton search_btn;
+    private EditText search_edit_text;
+    private TextView logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +64,10 @@ public class ReviewPosts extends AppCompatActivity {
         home_button = findViewById(R.id.home_btn_2);
         profile_button = findViewById(R.id.profile_btn_2);
         fav_button = findViewById(R.id.fav_btn_2);
+
+        search_btn = findViewById(R.id.search_btn);
+        search_edit_text = findViewById(R.id.search_edit_text);
+        logo = findViewById(R.id.logo2);
 
         review_post_loading = findViewById(R.id.review_post_loading);
 
@@ -101,14 +113,19 @@ public class ReviewPosts extends AppCompatActivity {
 
                         item_model.add(new ModelItemReviewPost(post_id, post_update_date, post_tag, post_title, post_locationURL, post_content, 231, post_listComment, post_listImage));
                     }
-                    ArrayList<ModelItemReviewPost> filtered_item = new ArrayList<>();
-                    filtered_item = setArrayList(item_model, getIntent().getStringExtra("selected_item"));
 
-                    recycler_adapter = new RecyclerAdapter(mContext, filtered_item);
-                    recyclerView.setAdapter(recycler_adapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+                    if (!getIntent().getStringExtra("selected_item").equals("search"))
+                    {
+                        search_btn.setVisibility(View.GONE);
+                        ArrayList<ModelItemReviewPost> filtered_item = new ArrayList<>();
+                        filtered_item = setArrayList(item_model, getIntent().getStringExtra("selected_item"));
+
+                        recycler_adapter = new RecyclerAdapter(mContext, filtered_item);
+                        recyclerView.setAdapter(recycler_adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+                        recycler_adapter.notifyDataSetChanged();
+                    }
                     review_post_loading.setVisibility(View.GONE);
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -154,6 +171,46 @@ public class ReviewPosts extends AppCompatActivity {
                 }
             }
         });
+
+        if (getIntent().getStringExtra("selected_item").equals("search"))
+        {
+            search_edit_text.setVisibility(View.VISIBLE);
+            search_btn.setVisibility(View.VISIBLE);
+            logo.setVisibility(View.GONE);
+            search_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (review_post_loading.getVisibility() != View.VISIBLE)
+                    {
+                        ArrayList<ModelItemReviewPost> filtered_item = new ArrayList<>();
+
+                        review_post_loading.setVisibility(View.VISIBLE);
+
+                        if (!search_edit_text.getText().toString().equals(""))
+                        {
+                            for (int i = 0; i < item_model.size(); ++i)
+                            {
+                                if (item_model.get(i).getTitle().contains(search_edit_text.getText().toString()))
+                                {
+                                    filtered_item.add(item_model.get(i));
+                                }
+                            }
+
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(search_edit_text.getWindowToken(), 0);
+                        }
+
+                        recycler_adapter = new RecyclerAdapter(mContext, filtered_item);
+                        recyclerView.setAdapter(recycler_adapter);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+                        recycler_adapter.notifyDataSetChanged();
+                        review_post_loading.setVisibility(View.GONE);
+                    }
+
+                }
+            });
+        }
     }
 
     private ArrayList<ModelItemReviewPost> setArrayList(ArrayList<ModelItemReviewPost> temp, String tag) {

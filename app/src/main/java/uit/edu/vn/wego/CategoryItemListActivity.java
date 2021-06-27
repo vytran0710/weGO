@@ -30,6 +30,8 @@ public class CategoryItemListActivity extends AppCompatActivity {
     private ImageView profile_button;
     private ImageView fav_button;
 
+    private ImageView search_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,8 @@ public class CategoryItemListActivity extends AppCompatActivity {
         home_button = findViewById(R.id.home_btn_1);
         profile_button = findViewById(R.id.profile_btn_1);
         fav_button = findViewById(R.id.fav_btn_1);
+
+        search_btn = findViewById(R.id.search_btn);
 
         switch(selected_category)
         {
@@ -82,6 +86,15 @@ public class CategoryItemListActivity extends AppCompatActivity {
                 {
                     Toast.makeText(v.getContext(), "Please login first.", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ReviewPosts.class);
+                intent.putExtra("selected_item", "search");
+                startActivity(intent);
             }
         });
     }

@@ -31,6 +31,8 @@ public class HomeScreenActivity extends AppCompatActivity {
     private ImageButton profile_btn;
     private ImageButton fav_btn;
 
+    private ImageButton search_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,8 @@ public class HomeScreenActivity extends AppCompatActivity {
 
         profile_btn = findViewById(R.id.profile_btn);
         fav_btn = findViewById(R.id.fav_btn);
+
+        search_btn = findViewById(R.id.search_btn);
 
         fav_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +115,15 @@ public class HomeScreenActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeScreenActivity.this,ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        search_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), ReviewPosts.class);
+                intent.putExtra("selected_item", "search");
                 startActivity(intent);
             }
         });
