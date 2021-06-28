@@ -37,8 +37,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="0dp"
-            android:layout_marginRight="0dp"
             android:layout_toStartOf="@+id/apply_edit_btn"
             android:layout_toLeftOf="@+id/apply_edit_btn"
             android:backgroundTint="@color/white"
@@ -53,7 +51,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/top_group"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
         android:orientation="vertical">
 
         <ImageView
@@ -61,7 +58,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:id="@+id/edit_profile_image"
-            android:layout_margin="10dp"/>
+            android:layout_margin="5dp"/>
         <TextView
             android:id="@+id/change_profile_photo_button"
             android:backgroundTint="@color/white"
@@ -78,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_profile_photo_group"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
         android:layout_marginHorizontal="15dp"
         android:orientation="vertical">
 
@@ -87,39 +84,47 @@
             android:layout_height="wrap_content"
             android:text="Full name"
             android:textColor="#07BEB8"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
         <EditText
             android:id="@+id/fullName_editText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="123"
-            android:textSize="25sp"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Email"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textColor="#07BEB8"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="5dp"/>
         <EditText
             android:id="@+id/email_editText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:inputType="textEmailAddress"
             android:text="abc@xyz.com"
-            android:textSize="25sp"/>
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
-    <ImageButton
-
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/change_password_btn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="#07BEB8"
+        android:text="Change password"
+        android:layout_below="@id/edit_profile_info_group"/>
+
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/log_out"/>
+        android:backgroundTint="#07BEB8"
+        android:text="LOG OUT"
+        />
 
 </RelativeLayout>

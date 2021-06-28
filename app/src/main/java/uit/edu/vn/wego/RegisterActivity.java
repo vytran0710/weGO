@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         toLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -59,9 +59,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = txtEmail.getText().toString();
                 String pw = txtPassword.getText().toString();
                 String confirmPw = txtConfirmPassword.getText().toString();
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
                 if (username.equals("") || email.equals("") || pw.equals("") || confirmPw.equals("")) {
                     Toast.makeText(getApplicationContext(), "More information required", Toast.LENGTH_SHORT).show();
+                } else if (!email.matches(emailPattern)) {
+                    Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
                 } else if (pw.equals(confirmPw)) {
                     String data = "{" + "\"username\":\"" + username +
                             "\",\"email\":\"" + email +
@@ -69,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                     //Log.d("data",data);
                     submitSignUp(data);
 
-                    Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
 
                 } else {

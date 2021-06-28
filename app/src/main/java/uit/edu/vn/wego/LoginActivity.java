@@ -2,6 +2,7 @@ package uit.edu.vn.wego;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private static ModelItemUser itemUser;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,12 +68,27 @@ public class LoginActivity extends AppCompatActivity {
                 if (username.equals("") || password.equals("")) {
                     Toast.makeText(getApplicationContext(), "More information required", Toast.LENGTH_SHORT).show();
                 } else {
+                    setProgressDialog();
                     String data = "{" + "\"username\":\"" + username +
                             "\",\"password\":\"" + password + "\"}";
                     submitLogin(data);
                 }
             }
         });
+    }
+
+    private void setProgressDialog(){
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
+        progressDialog.setMessage("Waiting...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        progressDialog.dismiss();
+        super.onBackPressed();
     }
 
     private void submitLogin(String dataSubmit) {
@@ -83,8 +101,10 @@ public class LoginActivity extends AppCompatActivity {
                     String type = response.getString("type");
 
                     if (type.equals("Not exists user")) {
+                        progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_SHORT).show();
                     } else if (type.equals("Login fail")) {
+                        progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Username or password is invalid", Toast.LENGTH_SHORT).show();
                     } else {
                         JSONObject user = response.getJSONObject("user");
@@ -107,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+                        progressDialog.dismiss();
 
                     }
                 } catch (JSONException e) {

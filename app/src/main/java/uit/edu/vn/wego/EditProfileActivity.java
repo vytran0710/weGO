@@ -1,6 +1,7 @@
 package uit.edu.vn.wego;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +15,7 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -25,7 +27,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.BitmapCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,25 +36,29 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 import uit.edu.vn.wego.adapter.ModelItemUser;
+import uit.edu.vn.wego.model.NewAvatarData;
 
 public class EditProfileActivity extends AppCompatActivity {
+    ProgressDialog progressDialog;
 
     private ImageButton apply_btn;
     private ImageButton cancel_btn;
-    private ImageButton logout_btn;
+    private Button logout_btn;
     private TextView change_profile_photo_btn;
 
     private ImageView profile_image;
@@ -67,7 +72,6 @@ public class EditProfileActivity extends AppCompatActivity {
     private RequestQueue queue;
 
     private File selectedImageFile;
-    private String encodeImage;
     private boolean confirmUpdatePhoto = false;
 
     private static final int REQUEST_CODE_STORAGE_PERMISSION = 1;
@@ -117,13 +121,20 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
                 if (itemUser.getFullName().equals(fullName) && itemUser.getEmail().equals(email)) {
                     if (confirmUpdatePhoto) {
-                        updatePhoto();
+                        setProgressDialog();
+                        uploadAvatar();
                     }
                     return;
                 }
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                if (!email.matches(emailPattern)) {
+                    Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setProgressDialog();
                 updateProfile(fullName, email);
                 if (confirmUpdatePhoto) {
-                    updatePhoto();
+                    uploadAvatar();
                 }
             }
         });
@@ -151,6 +162,14 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void setProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
     private void selectImage() {
@@ -182,9 +201,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (selectedImageUri != null) {
                     try {
 
-                        InputStream inputStream = getContentResolver().openInputStream(selectedImageUri);
-                        encodeImage = encodeBitmapImage(BitmapFactory.decodeStream(inputStream));
-
                         selectedImageFile = new File(getPathFromUri(selectedImageUri));
                         Glide.with(context)
                                 .load(selectedImageFile.toString())
@@ -215,62 +231,28 @@ public class EditProfileActivity extends AppCompatActivity {
         return filePath;
     }
 
-    private String encodeBitmapImage(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
-        byte[] imageByte = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(imageByte, Base64.DEFAULT);
-    }
+    private void uploadAvatar() {
 
-    private void updatePhoto() {
-        Toast.makeText(getApplicationContext(), "test 1", Toast.LENGTH_SHORT).show();
+        RequestBody requestBodyAvt = RequestBody.create(MediaType.parse("multipart/form-data"), selectedImageFile);
+        MultipartBody.Part multipartBodyAvt = MultipartBody.Part.createFormData("avatar", selectedImageFile.getPath(), requestBodyAvt);
 
-        String url = "https://we-go-app2021.herokuapp.com/user/" + itemUser.getId() + "/upAvatar";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+        ApiService.retrofit.getObject(itemUser.getId(), multipartBodyAvt).enqueue(new Callback<NewAvatarData>() {
             @Override
-            public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(), "test 2", Toast.LENGTH_SHORT).show();
-
-                try {
-                    String message = response.getString("message");
-                    String error = response.getString("error");
-                    Log.d("error",error);
-                    Toast.makeText(getApplicationContext(), error, Toast.LENGTH_LONG).show();
-                    if (message.equals("Up avatar successful")) {
-                        Toast.makeText(getApplicationContext(), "upload successful", Toast.LENGTH_SHORT).show();
-                        String avatar = response.getString("avatar");
-                        itemUser.setAvatar(avatar);
-                        Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "test 3", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Please try again", Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("avatar",encodeImage);
-                return params;
+            public void onResponse(Call<NewAvatarData> call, retrofit2.Response<NewAvatarData> response) {
+                NewAvatarData data = response.body();
+                Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
+                itemUser.setAvatar(data.getAvatar());
+                Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                progressDialog.dismiss();
             }
 
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/json; charset=UTF-8");
-                params.put("Authorization", itemUser.getToken());
-                return params;
+            public void onFailure(Call<NewAvatarData> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Please try again", Toast.LENGTH_LONG).show();
             }
-        };
-        queue.add(request);
+        });
     }
 
     private void updateProfile(String fullName, String email) {
@@ -291,6 +273,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
+                            progressDialog.dismiss();
                         }
                     }
                 } catch (JSONException e) {
