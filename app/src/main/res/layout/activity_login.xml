@@ -48,7 +48,7 @@
             android:paddingRight="16dp"
             android:paddingLeft="16dp"
             android:drawableRight="@drawable/username_icon"
-            />
+            android:imeOptions="actionGo"/>
 
         <EditText
             android:hint="Password"
@@ -62,7 +62,7 @@
             android:inputType="textPassword"
             android:paddingRight="16dp"
             android:paddingLeft="16dp"
-            />
+            android:imeOptions="actionDone"/>
 
         <Button
             android:id="@+id/login_button"

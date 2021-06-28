@@ -40,6 +40,7 @@
         <EditText
             android:hint="Username"
             android:inputType="text"
+            android:imeOptions="actionGo"
             android:id="@+id/register_username"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -51,6 +52,7 @@
         <EditText
             android:hint="Email"
             android:inputType="textEmailAddress"
+            android:imeOptions="actionGo"
             android:id="@+id/register_email"
             android:layout_below="@+id/register_username"
             android:layout_width="match_parent"
@@ -64,6 +66,7 @@
         <EditText
             android:hint="Password"
             android:inputType="textPassword"
+            android:imeOptions="actionGo"
             android:id="@+id/register_password"
             android:layout_below="@+id/register_email"
             android:layout_width="match_parent"
@@ -77,6 +80,7 @@
         <EditText
             android:hint="Confirm password"
             android:inputType="textPassword"
+            android:imeOptions="actionDone"
             android:id="@+id/register_confirm_password"
             android:layout_below="@+id/register_password"
             android:layout_width="match_parent"

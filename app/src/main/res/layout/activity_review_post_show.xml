@@ -19,7 +19,7 @@
                 android:id="@+id/review_post_show_update_date_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="update_date"></TextView>
+                android:text="update_date"/>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="30dp"
-                android:gravity="center_horizontal"></TextView>
+                android:gravity="center_horizontal"/>
             <TextView
                 android:id="@+id/review_post_show_content_textview"
                 android:layout_width="match_parent"
@@ -41,7 +41,7 @@
                 android:text="content"
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                android:layout_marginHorizontal="5dp"></TextView>
+                android:layout_marginHorizontal="5dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="71dp"
@@ -61,7 +61,7 @@
                         android:layout_weight="1"
                         android:visibility="visible"
                         android:backgroundTint="@android:color/transparent"
-                        android:src="@drawable/like"></ImageButton>
+                        android:src="@drawable/like"/>
 
                     <ImageButton
                         android:id="@+id/unlike_btn_reviewpost"
@@ -70,7 +70,7 @@
                         android:layout_weight="1"
                         android:visibility="gone"
                         android:backgroundTint="@android:color/transparent"
-                        android:src="@drawable/unlike"></ImageButton>
+                        android:src="@drawable/unlike"/>
 
                 </FrameLayout>
 
@@ -81,14 +81,14 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="@android:color/transparent"
-                    android:src="@drawable/cmt"></ImageButton>
+                    android:src="@drawable/cmt" />
                 <ImageButton
                     android:id="@+id/map_btn_reviewpost"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:backgroundTint="@android:color/transparent"
-                    android:src="@drawable/map_in_reviewpost"></ImageButton>
+                    android:src="@drawable/map_in_reviewpost"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -105,8 +105,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/write_comment_edittext"
-                        android:inputType="textMultiLine"
-                        android:layout_weight="8">
+                        android:inputType="text"
+                        android:layout_weight="8"
+                        android:imeOptions="actionDone">
                     </EditText>
                     <Button
                         android:layout_width="wrap_content"
@@ -114,7 +115,7 @@
                         android:id="@+id/post_comment"
                         android:backgroundTint="#07BEB8"
                         android:text="POST"
-                        android:layout_weight="1"></Button>
+                        android:layout_weight="1"/>
                 </LinearLayout>
                 <TextView
                     android:layout_width="match_parent"
