@@ -1,3 +1,5 @@
+![](https://user-images.githubusercontent.com/67744403/124298351-59957600-db86-11eb-8f1d-d96d09fe6bf8.PNG)
+
 1. CHỨC NĂNG
 - Xem những bài viết hay và thú vị về du lịch và bình luận, lưu, thích những bài viết ấy
 - Xem các thông tin về các địa điểm du lịch, địa điểm, giá vé, tích hợp google map
