@@ -1,5 +1,6 @@
 
-<div style="text-align:center"><img src="https://user-images.githubusercontent.com/67744403/124298351-59957600-db86-11eb-8f1d-d96d09fe6bf8.PNG" /></div>
+<img align="center" width="100" height="100" src="https://user-images.githubusercontent.com/67744403/124298351-59957600-db86-11eb-8f1d-d96d09fe6bf8.PNG">
+
 1. CHỨC NĂNG
 - Xem những bài viết hay và thú vị về du lịch và bình luận, lưu, thích những bài viết ấy
 - Xem các thông tin về các địa điểm du lịch, địa điểm, giá vé, tích hợp google map
@@ -11,7 +12,7 @@
 - Bộ nhớ còn trống : 200mb trở lên
 3. THƯ VIỆN VÀ CÔNG NGHỆ
 - IDE : Android Studio
-- Database : Firebase
+- Database : MongoDB và Cloudiary
 - Framework : Androi java
 - Công cụ thiết kế : Figma
 - Ngôn ngữ lập trình : Java
