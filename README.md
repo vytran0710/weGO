@@ -33,10 +33,10 @@
  
 ## 4 TÁC GIẢ
 <ul>
-  <li>Trần Quốc Vỹ</li>
-  <li>Nguyễn Quốc Trung</li>
-  <li>Trần Thành Trung</li>
-  <li>Phùng Thanh Tú</li>
+  <li>Trần Quốc Vỹ - 18520406</li>
+  <li>Nguyễn Quốc Trung - 19522429</li>
+  <li>Trần Thành Trung - 19522436</li>
+  <li>Phùng Thanh Tú - 19522455</li>
  </ul>
  
 ## 5 BACKEND/DATABASE/DIAGRAM
