@@ -29,16 +29,16 @@
   <li>Ngôn ngữ lập trình : Java</li>
   <li>Ngôn ngữ Markup : XML</li>
  </ul>
-## 4. BACKEND/DATABASE/DIAGRAM
-<ul>
-</ul>
-## 5. TÁC GIẢ
+## 4. TÁC GIẢ
 <ul>
   <li>Trần Quốc Vỹ</li>
   <li>Nguyễn Quốc Trung</li>
   <li>Trần Thành Trung</li>
   <li>Phùng Thanh Tú</li>
  </ul>
+## 4. BACKEND/DATABASE/DIAGRAM
+<ul>
+</ul>
 ## 6. GIẤY PHÉP
 <ul>
 </ul>
