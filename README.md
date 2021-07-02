@@ -25,7 +25,7 @@
 <ul>
   <li>IDE : Android Studio</li>
   <li>Database : MongoDB và Cloudiary</li>
-  <li>Framework : Androi java</li>
+  <li>Framework : Android java</li>
   <li>Công cụ thiết kế UI : Figma</li>
   <li>Ngôn ngữ lập trình : Java</li>
   <li>Ngôn ngữ Markup : XML</li>
