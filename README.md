@@ -30,7 +30,8 @@
   <li>Ngôn ngữ Markup : XML</li>
  </ul>
 ## 4. BACKEND/DATABASE/DIAGRAM
-
+<ul>
+</ul>
 ## 5. TÁC GIẢ
 <ul>
   <li>Trần Quốc Vỹ</li>
@@ -39,4 +40,5 @@
   <li>Phùng Thanh Tú</li>
  </ul>
 ## 6. GIẤY PHÉP
-
+<ul>
+</ul>
