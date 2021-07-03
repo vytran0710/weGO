@@ -85,12 +85,6 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
-    @Override
-    public void onBackPressed() {
-        progressDialog.dismiss();
-        super.onBackPressed();
-    }
-
     private void submitLogin(String dataSubmit) {
 
         String url = "https://we-go-app2021.herokuapp.com/user/login";
