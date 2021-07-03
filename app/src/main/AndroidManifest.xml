@@ -3,21 +3,23 @@
     package="uit.edu.vn.wego">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeGO"
-        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".TermsOfServiceActivity"></activity>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".CategoryItemListActivity" />
-        <activity android:name=".ReviewPostShow"
+        <activity
+            android:name=".ReviewPostShow"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".HomeScreenActivity">
             <intent-filter>
@@ -26,12 +28,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".RegisterActivity"
+        <activity
+            android:name=".RegisterActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ReviewPosts" />
-        <activity android:name=".EditProfileActivity"/>
+        <activity android:name=".EditProfileActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

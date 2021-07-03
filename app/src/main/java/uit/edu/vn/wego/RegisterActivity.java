@@ -30,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button btSignUp;
 
     private RequestQueue queue;
+    private TextView terms_of_service_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,15 @@ public class RegisterActivity extends AppCompatActivity {
         txtPassword = (TextView) findViewById(R.id.register_password);
         txtConfirmPassword = (TextView) findViewById(R.id.register_confirm_password);
         btSignUp = (Button) findViewById(R.id.register_button);
+        terms_of_service_button = findViewById(R.id.terms_of_service_button);
+
+        terms_of_service_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this,TermsOfServiceActivity.class);
+                startActivity(intent);
+            }
+        });
 
         toLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
