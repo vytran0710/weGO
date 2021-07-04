@@ -159,13 +159,20 @@ public class ReviewPostShow extends AppCompatActivity {
             }
         });
 
-        location_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLocationURL()));
-                startActivity(browserIntent);
-            }
-        });
+        if (item.getLocationURL().isEmpty())
+        {
+            location_button.setVisibility(View.GONE);
+        }
+        else
+        {
+            location_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.getLocationURL()));
+                    startActivity(browserIntent);
+                }
+            });
+        }
 
         Fresco.initialize(this);
 

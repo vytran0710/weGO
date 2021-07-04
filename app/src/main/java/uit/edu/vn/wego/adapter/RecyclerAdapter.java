@@ -154,13 +154,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             }
         });
 
-        holder.location_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item_model.get(position).getLocationURL()));
-                ((Activity) v.getContext()).startActivity(browserIntent);
-            }
-        });
+        if (item_model.get(position).getLocationURL().isEmpty())
+        {
+            holder.location_button.setVisibility(View.GONE);
+        }
+        else
+        {
+            holder.location_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(item_model.get(position).getLocationURL()));
+                    ((Activity) v.getContext()).startActivity(browserIntent);
+                }
+            });
+        }
     }
 
     private boolean userLike_UnLikePost(String status, int position) {
