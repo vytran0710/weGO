@@ -184,7 +184,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     change_password_info_btn.setText("change information");
                     info_group.setVisibility(View.GONE);
                     password_group.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     change_password_info_btn.setText("change password");
                     info_group.setVisibility(View.VISIBLE);
                     password_group.setVisibility(View.GONE);
@@ -297,10 +297,12 @@ public class EditProfileActivity extends AppCompatActivity {
 
         ApiService.retrofit.getObject(itemUser.getId(), multipartBodyAvt).enqueue(new Callback<NewAvatarData>() {
             @Override
-            public void onResponse(Call<NewAvatarData> call, retrofit2.Response<NewAvatarData> response) {
+            public void onResponse(@NonNull Call<NewAvatarData> call, @NonNull retrofit2.Response<NewAvatarData> response) {
                 NewAvatarData data = response.body();
                 Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
+
                 itemUser.setAvatar(data.getAvatar());
+
                 Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -309,7 +311,9 @@ public class EditProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<NewAvatarData> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Please try again", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Please login again", Toast.LENGTH_LONG).show();
+                logOut();
             }
         });
     }
@@ -353,7 +357,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public byte[] getBody() {
                 try {
-                    return dataSubmit == null ? null : dataSubmit.getBytes("utf-8");
+                    return dataSubmit.getBytes("utf-8");
                 } catch (UnsupportedEncodingException uee) {
                     //VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
                     return null;
@@ -373,7 +377,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void changePassword(String dataSubmit) {
 
-        String url = "https://we-go-app2021.herokuapp.com/user/"+itemUser.getId()+"/changePassword";
+        String url = "https://we-go-app2021.herokuapp.com/user/" + itemUser.getId() + "/changePassword";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -383,7 +387,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Old password does not match", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }
-                    if(message.equals("Change password successful")){
+                    if (message.equals("Change password successful")) {
                         Toast.makeText(getApplicationContext(), "Change password successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(EditProfileActivity.this, ProfileActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
