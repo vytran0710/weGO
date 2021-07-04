@@ -309,7 +309,9 @@ public class EditProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<NewAvatarData> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Please try again", Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), "Please login again", Toast.LENGTH_LONG).show();
+                logOut();
             }
         });
     }

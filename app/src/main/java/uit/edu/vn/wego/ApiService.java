@@ -1,6 +1,7 @@
 package uit.edu.vn.wego;
 
 import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -15,6 +16,7 @@ public interface ApiService {
     ApiService retrofit = new Retrofit.Builder()
             .baseUrl("https://we-go-app2021.herokuapp.com/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(new OkHttpClient.Builder().build())
             .build()
             .create(ApiService.class);
 
