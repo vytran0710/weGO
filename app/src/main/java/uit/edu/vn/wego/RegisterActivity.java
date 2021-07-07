@@ -2,11 +2,13 @@ package uit.edu.vn.wego;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.drawable.ProgressBarDrawable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private RequestQueue queue;
     private TextView terms_of_service_button;
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,14 +81,11 @@ public class RegisterActivity extends AppCompatActivity {
                 } else if (!email.matches(emailPattern)) {
                     Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
                 } else if (pw.equals(confirmPw)) {
+                    setProgressDialog();
                     String data = "{" + "\"username\":\"" + username +
                             "\",\"email\":\"" + email +
                             "\",\"password\":\"" + pw + "\"}";
-                    //Log.d("data",data);
                     submitSignUp(data);
-
-                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                    startActivity(intent);
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Password doesn't match, please try again", Toast.LENGTH_SHORT).show();
@@ -91,6 +93,14 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setProgressDialog(){
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.THEME_HOLO_DARK);
+        progressDialog.setMessage("Waiting...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
     private void submitSignUp(String dataSubmit) {
@@ -101,9 +111,13 @@ public class RegisterActivity extends AppCompatActivity {
                 try {
                     String message = response.getString("message");
                     if (message.equals("Username exists")) {
+                        progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Existed user, please log in", Toast.LENGTH_SHORT).show();
                     } else {
+                        progressDialog.dismiss();
                         Toast.makeText(getApplicationContext(), "Account created successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -112,6 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
                 Toast.makeText(getApplicationContext(), "Error, account was not created", Toast.LENGTH_LONG).show();
             }
         }) {

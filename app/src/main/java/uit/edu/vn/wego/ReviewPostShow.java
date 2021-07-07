@@ -153,6 +153,7 @@ public class ReviewPostShow extends AppCompatActivity {
                 if (!comment.isEmpty()) {
                     String dataSubmit = "{" + "\"comment\":\"" + comment + "\"}";
                     userCommentPost(dataSubmit);
+                    writeComment_editText.setText("");
                 }
                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(writeComment_editText.getWindowToken(), 0);
